@@ -15,7 +15,7 @@ For installation plese follow the steps given below:
 There are some python packages and libraries, you'll need to install, these are given in the requirements.txt, please make sure you install these according to your preference, using
 
 ```python
-pip install duckduckgo-search pillow requests tqdm
+pip install ddgs pillow requests tqdm
 ```
 *Other requirements should be pre-installed*
 

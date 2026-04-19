@@ -1,0 +1,27 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+# virtual environment
+bin/
+include/
+lib/
+lib64/
+pyvenv.cfg
+venv/
+
+# dataset images
+dataset/images/
+
+# python cache
+__pycache__/
+*.pyc
+
+# training outputs
+runs/
+*.pt
+*.onnx
+*.tflite
+*.task
+
+# OS clutter
+.DS_Store
+Thumbs.db

@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-
-import cv2
 import os
 
 def get_camera_name(index):

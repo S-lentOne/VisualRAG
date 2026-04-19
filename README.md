@@ -18,14 +18,16 @@ There are some python packages and libraries, you'll need to install, these are 
 pip install duckduckgo-search pillow requests tqdm
 ```
 *Other requirements should be pre-installed*
-*However if you encounter any other errors, please look in the requirements.txt and install any of the packages not yet installed*
+
+*However, if you encounter any other errors, please look in the requirements.txt and install any of the packages not yet installed.*
+
 *to check which packages you already have installed, use:*
 
 ```pip freeze```
 
 - **Dataset**
 
-(will be updated soon)
+Please refer to Dataset/README.md for more info. 
 
 ### Script Installation 
 

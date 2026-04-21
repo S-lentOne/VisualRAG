@@ -1,0 +1,28 @@
+class: wallet
+aliases: billfold, purse, card holder, leather wallet, money clip, bifold wallet, trifold wallet
+category: personal item
+
+description:
+A wallet is a flat, foldable personal accessory used to carry cash, payment cards (credit/debit), identification cards, and other small flat items. It is one of the most universally carried personal items alongside a phone and keys.
+
+physical appearance:
+Traditional wallets are rectangular, folded items made of leather, synthetic material, or fabric. Bifold wallets fold once and measure roughly 9 cm × 10 cm when open, 9 cm × 5 cm when closed. Trifold wallets are slightly thicker when closed. Slim card holders are flat, rigid, or semi-rigid cases 8–9 cm long holding only cards. Colors are typically brown, black, tan, navy, or gray. Leather wallets often show creasing and wear on the edges. Some wallets have a transparent window for an ID card.
+
+common use contexts:
+- Carried daily in a pocket, bag, or purse as an essential personal item
+- Placed on a desk or table when sitting down at a workspace
+- Used for in-person payments, card taps, and cash transactions
+- Left near an entrance or on a surface when returning home
+- Paired with keys as part of an everyday carry (EDC) routine
+
+scene inference:
+A wallet on a desk or table is extremely common and typically indicates the owner is settled in the space — they have arrived, sat down, and emptied their pockets. Alongside keys and a phone, it forms the classic "pocket dump" on a desk. In a workspace scene, a wallet suggests the person has been in this space for a while rather than passing through. A wallet near a bag may indicate the person is about to leave or has just arrived.
+
+associated objects:
+keys, phone, watch, backpack, glasses
+
+typical locations:
+desk surface, table, counter, inside a bag or backpack, beside a phone
+
+functional notes:
+The wallet is a personal-space anchor. When placed on a desk alongside other items like keys and a phone, it confirms the person has "settled in" to the space. Slim card holders suggest a minimalist lifestyle preference. A thick, bulging wallet suggests the person carries a lot of physical items.

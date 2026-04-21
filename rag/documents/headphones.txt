@@ -1,0 +1,29 @@
+class: headphones
+aliases: over-ear headphones, on-ear headphones, studio headphones, wireless headphones, noise-cancelling headphones
+category: electronics
+
+description:
+Headphones are audio devices worn on or over the ears, connected to an audio source via a cable or wirelessly via Bluetooth. They provide higher audio fidelity and more powerful noise isolation than earbuds due to their larger drivers and physical ear coverage.
+
+physical appearance:
+Headphones consist of two ear cups connected by an adjustable headband that arches over the top of the head. Ear cups are circular or oval, roughly 8–10 cm in diameter. The headband is padded and adjustable. Over-ear headphones fully enclose the ear; on-ear headphones rest on the ear. Common colors include black, white, silver, and gray. Wireless models have no visible cable; wired models have a 1–3 m cable descending from one ear cup. Some models fold flat for portability.
+
+common use contexts:
+- Professional audio work: music production, mixing, podcast recording, sound design
+- Immersive listening during extended work or study sessions
+- Gaming with spatial audio
+- Video calls and remote meetings requiring clear microphone input
+- Commuting and travel when noise isolation is important
+- Focus sessions in noisy shared environments
+
+scene inference:
+Headphones on a desk or resting around a neck/head indicate an audio-focused user. Large studio-style headphones alongside a laptop or monitor suggest creative or professional audio work. Gaming headsets (often with a visible boom microphone) paired with a keyboard and mouse confirm a gaming setup. Headphones alongside a notebook and laptop suggest deep work sessions where audio accompaniment aids concentration. Unlike earbuds, headphones are harder to ignore in a scene and more deliberately placed — they signal intentional audio use.
+
+associated objects:
+laptop, phone, speaker, USB cable, microphone, keyboard, monitor, notebook
+
+typical locations:
+around neck, on desk, hanging on monitor or headphone stand, on a bag
+
+functional notes:
+Headphones are a larger, more deliberate audio investment than earbuds. Their presence suggests the user prioritizes audio quality. A headphone stand on the desk indicates a well-organized, possibly audiophile or creative workspace. Headphones paired with a microphone strongly suggest content creation, podcasting, or professional conferencing.   

@@ -1,0 +1,28 @@
+class: keyboard
+aliases: computer keyboard, mechanical keyboard, wireless keyboard, typing keyboard
+category: electronics
+
+description:
+A computer keyboard is an input peripheral used to type text and issue commands to a computer. It contains alphanumeric keys, function keys, modifier keys (Shift, Ctrl, Alt), and navigation keys arranged in a standardized layout (most commonly QWERTY).
+
+physical appearance:
+Keyboards are flat, rectangular devices wider than they are tall. Standard full-size keyboards are approximately 44 cm wide and 14 cm deep. Compact and tenkeyless versions are shorter. They range from slim, low-profile membrane keyboards (about 1.5 cm tall) to taller mechanical keyboards (3–4 cm). Colors vary widely — black, white, gray, and RGB-backlit variants are common. Keys are arranged in staggered rows.
+
+common use contexts:
+- Desktop computer setups as the primary text input device
+- Extended laptop use when the built-in keyboard is insufficient
+- Gaming setups where mechanical keyboards are preferred for tactile response
+- Office workstations, writing desks, coding environments
+- Home office setups paired with a monitor and mouse
+
+scene inference:
+A standalone keyboard (without a visible laptop directly underneath) strongly suggests a desktop computer setup. If paired with a monitor and mouse, it confirms a full desktop workstation. A keyboard alone on a clean desk may indicate a writing or programming focus. Mechanical keyboards with RGB lighting often indicate a gaming or enthusiast computing context.
+
+associated objects:
+monitor, mouse, laptop, USB cable, desk mat, speaker, computer
+
+typical locations:
+desk, table, workstation
+
+functional notes:
+The keyboard's presence without a laptop suggests a desktop PC is nearby (even if not visible). It is rarely used in isolation — its context is almost always a broader computing workstation.

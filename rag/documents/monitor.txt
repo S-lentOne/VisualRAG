@@ -1,0 +1,29 @@
+class: monitor
+aliases: computer monitor, display, screen, desktop screen, external display, PC monitor
+category: electronics
+
+description:
+A computer monitor is an output display device that presents visual information from a computer. It connects to a computer via HDMI, DisplayPort, USB-C, or VGA cables and displays everything from desktop interfaces to video content.
+
+physical appearance:
+Monitors are rectangular screens mounted on an adjustable stand. Screen sizes typically range from 21 to 34 inches diagonally for desktop use. The screen is surrounded by a thin bezel (border) and sits atop a stand that allows height and tilt adjustment. Monitors are thin (3–5 cm depth for the panel) with a heavier base. Colors are almost universally black or dark gray. Ultrawide monitors have a noticeably wider aspect ratio than standard 16:9 displays.
+
+common use contexts:
+- Desktop workstations as the primary display
+- Dual-monitor or multi-monitor professional setups for expanded workspace
+- Extended display for laptops, giving more screen real estate
+- Video editing, graphic design, and color-sensitive creative work
+- Gaming setups, often with high refresh rate monitors
+- Home office environments
+
+scene inference:
+A monitor strongly indicates a desktop computing environment. Combined with a keyboard and mouse, it forms the classic desktop workstation. A monitor paired with a laptop suggests a docking or extended display setup common in professional environments. Multiple monitors in frame indicate a power user, developer, trader, or creative professional. A large monitor alone on a clean desk suggests a focused, professional workspace.
+
+associated objects:
+keyboard, mouse, laptop, USB cable, speaker, webcam/camera, desk lamp
+
+typical locations:
+desk, workstation, home office, office environment
+
+functional notes:
+The monitor is the visual anchor of any desktop computing scene. Its size and quantity can suggest the nature of the work — a single standard monitor for general use, a large or ultrawide for immersive work, dual monitors for multitasking-heavy roles like programming, writing, or financial analysis.

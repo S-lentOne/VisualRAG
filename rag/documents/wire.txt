@@ -1,0 +1,28 @@
+class: wire
+aliases: USB cable, charging cable, data cable, USB-C cable, Lightning cable, HDMI cable, electrical wire
+category: electronics
+
+description:
+A wire or cable in a desk/personal environment most commonly refers to a USB cable used for charging or data transfer, though it may also refer to display cables (HDMI, DisplayPort), audio cables (3.5mm), or power cables. Cables physically connect devices and enable power delivery or data communication.
+
+physical appearance:
+USB cables are flexible, cylindrical cords typically 1–2 m long and 3–5 mm in diameter. They are black, white, or gray, often with a braided nylon sleeve for durability on premium models. One or both ends terminate in a connector: USB-A (rectangular), USB-C (oval, symmetrical), Lightning (Apple proprietary), or Micro-USB. HDMI cables are thicker with a trapezoidal connector. Cables may coil loosely on a desk or be bundled with a velcro tie.
+
+common use contexts:
+- Charging smartphones, tablets, earbuds, and laptops
+- Transferring files between a phone and computer
+- Connecting a keyboard, mouse, or external drive to a computer
+- Linking a monitor to a laptop or desktop via HDMI or DisplayPort
+- Audio connections between speakers, headphones, and devices
+
+scene inference:
+A cable on a desk is nearly universal and usually indicates an actively connected or recently used device. A cable running between a phone and laptop suggests file transfer or charging from a port. A cable connected to a charger and phone confirms charging behavior. Tangled or coiled cables on a desk can indicate a busy, dense tech setup. A neatly routed cable suggests an organized workstation. Cables without visible connected endpoints suggest a setup in progress or a habitually cluttered workspace.
+
+associated objects:
+phone, laptop, charger, keyboard, mouse, monitor, earbuds, speaker
+
+typical locations:
+desk surface, routed behind a desk, coiled beside devices, plugged into a power strip
+
+functional notes:
+Cables are highly context-dependent objects. Their meaning is derived almost entirely from what they are connected to. A USB-C cable connected to a laptop charger means power delivery; the same cable connected to a phone means charging or sync. Cable management (or lack thereof) is also a soft indicator of how intentionally the workspace was set up.

@@ -1,0 +1,29 @@
+class: calculator
+aliases: scientific calculator, pocket calculator, graphing calculator, financial calculator, desk calculator
+category: stationery
+
+description:
+A calculator is an electronic device designed to perform mathematical computations, ranging from basic arithmetic to advanced scientific, statistical, and graphing functions. It is a staple tool in mathematics, science, engineering, finance, and academic study.
+
+physical appearance:
+Pocket and scientific calculators are flat, rectangular devices roughly 15–18 cm tall and 7–8 cm wide, about 1–2 cm thick. They have a grid of rubber or plastic buttons labeled with numbers, operators, and mathematical functions. A display screen (LCD) sits at the top, showing 1–4 lines of numbers or expressions. Common colors are black, gray, and white. Popular models include the Casio fx series and Texas Instruments TI-84. Graphing calculators are slightly larger with a bigger screen. Desktop calculators are wider with a number pad layout and a paper roll output in some models.
+
+common use contexts:
+- Mathematics homework: algebra, calculus, statistics, trigonometry
+- Physics and chemistry problem sets requiring numerical computation
+- Accounting, finance, and economics coursework
+- Standardized tests (SAT, ACT, IB, A-Level) where calculators are permitted
+- Engineering coursework and technical problem-solving
+- Quick arithmetic in office or financial environments
+
+scene inference:
+A scientific calculator on a desk is one of the strongest academic and STEM-specific scene indicators. Its presence alongside a notebook, pen, and textbook strongly establishes a mathematics, physics, or engineering study session. A graphing calculator narrows the context further to higher-level mathematics or a standardized testing environment. A desktop calculator in an office setting suggests financial or accounting work. A calculator alongside a ruler and eraser confirms a structured, technical study session rather than a general reading or essay-writing one.
+
+associated objects:
+notebook, pen, ruler, eraser, textbook, laptop, paper
+
+typical locations:
+desk surface, beside a notebook, inside a pencil case or bag, on a workbench
+
+functional notes:
+The calculator is a high-confidence STEM and academic indicator. Very few non-academic or non-technical environments call for a physical calculator — its presence alone narrows scene interpretation considerably. The model type (basic vs. scientific vs. graphing) further specifies the level and subject of study.

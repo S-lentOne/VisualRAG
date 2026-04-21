@@ -1,0 +1,29 @@
+class: camera
+aliases: digital camera, DSLR, mirrorless camera, webcam, action camera, point-and-shoot camera
+category: electronics
+
+description:
+A camera is a device that captures photographs or video. In personal environments this typically refers to a digital camera (DSLR or mirrorless), a webcam mounted on a monitor, a point-and-shoot camera, or an action camera. Each type serves distinct use cases ranging from professional photography to live streaming.
+
+physical appearance:
+DSLRs and mirrorless cameras are chunky, rectangular bodies 12–15 cm wide with a protruding lens mount and interchangeable lenses. They have a visible viewfinder, mode dial on the top, and multiple buttons and dials on the body. Colors are typically black. Webcams are small, cylindrical or rectangular devices 5–10 cm wide that clip onto a monitor. Point-and-shoot cameras are compact, pocket-sized devices (10–12 cm wide). Action cameras like GoPros are very small cubes (5–6 cm) often in a protective housing.
+
+common use contexts:
+- Photography: portrait, landscape, street, event, and product photography
+- Video production: YouTube content creation, filmmaking, vlogging
+- Live streaming: webcams for gaming streams, video calls, or broadcasts
+- Professional conferencing: high-quality webcam for remote work video calls
+- Hobby photography as a form of creative expression
+- Security or monitoring when mounted in a fixed position
+
+scene inference:
+A DSLR or mirrorless camera on a desk alongside a laptop and editing software indicators (large monitor, color-calibrated display) strongly suggests a photography or videography workflow. A webcam mounted on a monitor confirms a remote work or streaming setup. A camera with a tripod nearby suggests active shooting or recording. A camera next to a backpack implies the user is preparing for or returning from a shoot. In a desk scene, a camera with memory cards and cables scattered around suggests an active content creation workflow.
+
+associated objects:
+laptop, monitor, tripod (implied), USB cable, memory card, backpack, phone
+
+typical locations:
+desk surface, mounted on monitor (webcam), on a shelf, inside a bag, on a tripod
+
+functional notes:
+The type of camera dramatically changes scene interpretation. A webcam confirms a digital communication workflow. A DSLR or mirrorless camera in a desk environment suggests creative professional work. Cameras are often accompanied by accessories (lenses, memory cards, straps) that may also be visible in the frame.

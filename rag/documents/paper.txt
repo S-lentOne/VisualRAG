@@ -1,0 +1,29 @@
+class: paper
+aliases: sheet of paper, loose paper, printed paper, A4 paper, letter paper, paper documents, printout
+category: stationery
+
+description:
+Paper refers to loose, unbound sheets used for writing, printing, drawing, or note-taking. In a desk environment, paper may appear as blank sheets ready for writing, printed documents, handwritten notes, or scattered loose-leaf notes from a notebook.
+
+physical appearance:
+Standard paper is A4 (21 × 29.7 cm) or US Letter (21.6 × 27.9 cm). Sheets are thin, white or off-white, and lie flat or may be folded, crumpled, or stacked. Printed paper shows text and images; handwritten paper shows ink or pencil marks. Paper may be lined (ruled), blank, or graph-gridded. A stack of printer paper is a clean rectangular ream; loose sheets on a desk are more irregular. Paper can appear as a single sheet, a scattered pile, or in a neat organized stack.
+
+common use contexts:
+- Handwritten notes and rough workings during a study session
+- Printed reference materials, articles, or lecture slides
+- Scratch paper for calculations, brainstorming, or diagrams
+- Printed assignments, reports, or forms awaiting review or signature
+- Draft material for creative writing or planning
+- Printed emails or digital content for offline annotation
+
+scene inference:
+Loose paper on a desk strongly indicates active work. Scattered paper with handwritten notes reinforces a busy study or work session in progress. A single printed sheet beside a laptop suggests the user is referencing a document while working digitally. A neat stack of blank paper indicates a writing-ready workstation. Paper with visible calculations or diagrams confirms a STEM study or technical work context. Paper in combination with a highlighter or red pen suggests document review or grading. A crumpled sheet on or near the desk suggests iteration or frustration in a creative or problem-solving task.
+
+associated objects:
+pen, pencil, notebook, laptop, calculator, printer (implied), eraser, highlighter
+
+typical locations:
+desk surface (scattered or stacked), under a laptop, inside a notebook, beside a printer
+
+functional notes:
+Paper is one of the most context-sensitive objects in a scene. Its state (blank, written, printed, crumpled) dramatically changes the inferred activity. Combined with other objects it strongly reinforces the nature of the work. The amount of paper visible also gives clues — many sheets suggest a research-heavy or document-intensive task; a single sheet suggests a focused reference task.

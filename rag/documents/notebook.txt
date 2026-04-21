@@ -1,0 +1,30 @@
+class: notebook
+aliases: paper notebook, journal, notepad, composition book, spiral notebook, planner, diary
+category: stationery
+
+description:
+A notebook is a bound collection of blank, lined, or dotted paper pages used for handwriting notes, drawings, plans, and records. It is a fundamental tool for study, planning, journaling, and creative work, and is one of the most common desk items in academic and professional settings.
+
+physical appearance:
+Notebooks come in many sizes: A5 (14.8 × 21 cm), A4 (21 × 29.7 cm), and US Letter are the most common. Standard composition books are 19 × 25 cm. Covers range from soft cardstock to hard-bound (hardcover). Spiral-bound notebooks have a wire coil along the spine. Colors vary widely. Opened notebooks show pages of lines, dots, or grids with handwritten content. Closed, they resemble flat rectangular books 1–2 cm thick depending on page count.
+
+common use contexts:
+- Taking handwritten notes during lectures, meetings, or study sessions
+- Journaling, daily planning, and personal reflection
+- Brainstorming and mind mapping ideas visually
+- Sketching diagrams, flowcharts, or designs
+- To-do lists and task management
+- Drafting content before transferring to a digital format
+- Language learning with vocabulary and grammar notes
+
+scene inference:
+A notebook open on a desk beside a laptop is one of the most common study and work scene indicators. It strongly suggests active note-taking or cross-referencing handwritten material with digital content. A notebook with a pen resting on top means the person recently set it down and will return. Multiple notebooks suggest either a multi-subject study session or long-term journaling habits. A notebook alongside textbooks confirms a study session. A planner-style notebook (with dated pages) indicates organizational behavior. A closed notebook neatly stacked on a desk means the session is paused or finished.
+
+associated objects:
+pen, pencil, eraser, ruler, laptop, calculator, textbook, backpack, highlighter
+
+typical locations:
+desk surface (open or closed), beside a laptop, inside a backpack, on a shelf
+
+functional notes:
+The notebook is among the strongest academic and intellectual scene indicators. Its content (if partially visible) — diagrams, formulas, lists, or dense text — can reveal the subject matter being studied. A Moleskine or premium dotted notebook (Leuchtturm1917 style) often signals a design, creative, or tech-adjacent user who values analog tools alongside digital ones.

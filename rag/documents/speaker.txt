@@ -1,0 +1,29 @@
+class: speaker
+aliases: computer speaker, desktop speaker, Bluetooth speaker, bookshelf speaker, portable speaker
+category: electronics
+
+description:
+A speaker is an electroacoustic transducer that converts electrical audio signals into audible sound. In personal and desk environments, speakers range from small desktop computer speakers to Bluetooth portable speakers to larger bookshelf speakers for high-fidelity listening.
+
+physical appearance:
+Desktop computer speakers typically come as a stereo pair — two compact units (10–20 cm tall) placed on either side of a monitor. They are rectangular or cylindrical, often black or gray, with a woven fabric or metal grille covering the driver. Portable Bluetooth speakers are cylindrical or boxy, 10–20 cm in length, in a wide range of colors. Bookshelf speakers are larger (25–35 cm tall), rectangular, with a wood or matte finish. Most speakers have a power indicator LED and volume knob.
+
+common use contexts:
+- Desktop audio for music, video, and general media consumption
+- Shared audio in a room where headphones are not preferred
+- Home office setups for calls and conferencing
+- Creative audio work such as music production (studio monitor speakers)
+- Casual ambient listening during work or study
+- Party or social settings with Bluetooth speakers
+
+scene inference:
+Speakers on a desk flanking a monitor suggest a deliberate, high-quality audio setup — common among music listeners, video editors, or audiophiles. A single small Bluetooth speaker on a desk indicates casual audio consumption without a dedicated setup. Speakers alongside headphones suggest the user switches between shared and private listening modes. Studio monitor speakers (flat, rectangular, with a tweeter and woofer visible) strongly indicate audio production work. A portable speaker in a non-desk environment suggests social or mobile use.
+
+associated objects:
+monitor, laptop, phone, headphones, USB cable, keyboard, amplifier
+
+typical locations:
+on either side of a monitor, desk surface, bookshelf, kitchen counter, living room
+
+functional notes:
+Speakers signal that audio is an important part of the user's environment. Unlike headphones, speakers indicate a willingness to share audio with the space, suggesting either a private workspace or social context. Studio monitors specifically narrow the scene to professional or semi-professional audio work.

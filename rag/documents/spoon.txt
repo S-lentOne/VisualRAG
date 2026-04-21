@@ -1,0 +1,28 @@
+class: spoon
+aliases: tablespoon, teaspoon, dessert spoon, soup spoon, stirring spoon, cutlery
+category: food and drink
+
+description:
+A spoon is a utensil consisting of a shallow oval or round bowl on the end of a handle, used for eating, stirring, and serving food and drink. In personal environments it most commonly appears during meals, snack breaks, or alongside hot beverages at a desk.
+
+physical appearance:
+Spoons range from small teaspoons (14–15 cm) to larger tablespoons and soup spoons (18–20 cm). They are typically made of stainless steel with a polished or matte finish, though plastic and wooden spoons also exist. The bowl (the oval end) is concave and smooth. Stainless steel spoons are silver-colored; plastic spoons may be white, black, or clear. A teaspoon may be left in a mug after stirring, a tablespoon left in a bowl or on a plate after eating.
+
+common use contexts:
+- Eating cereal, yogurt, soup, desserts, or snack foods at a desk or table
+- Stirring coffee or tea in a mug
+- Scooping sugar or instant coffee powder into a hot drink
+- Eating a quick meal at a workstation between tasks
+- Part of a full cutlery set at a meal setting
+
+scene inference:
+A spoon at a desk or workspace indicates a meal or snack break is occurring or has recently occurred. A spoon resting in a mug suggests hot drink preparation — coffee or tea with sugar stirred in. A spoon beside a bowl confirms eating behavior. A spoon on a desk alongside a laptop and other work materials suggests the person is eating while working, which is a common behavior during busy study or work sessions. A dirty spoon left on a desk surface hints at a casual, informal, or rushed eating moment rather than a sit-down meal.
+
+associated objects:
+cup, bowl (implied), laptop, notebook, can, bottle
+
+typical locations:
+inside a mug, on a plate or bowl, on the desk surface beside food or drink, on a napkin
+
+functional notes:
+The spoon is a transitional object in a workspace — it signals a food or drink moment occurring within what is primarily a work or study scene. Its presence adds a human, informal touch to the scene. A spoon in a mug specifically is a very common desk detail during working-hour beverage preparation.

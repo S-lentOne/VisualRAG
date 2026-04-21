@@ -1,0 +1,28 @@
+class: glasses
+aliases: eyeglasses, spectacles, reading glasses, sunglasses, prescription glasses
+category: personal item
+
+description:
+Glasses are optical devices worn on the face to correct vision, protect eyes from light or UV, or serve as a fashion accessory. Prescription glasses correct refractive vision errors (near-sightedness, far-sightedness, astigmatism). Reading glasses are used specifically for close-up tasks. Sunglasses block UV and reduce glare.
+
+physical appearance:
+Glasses consist of two lenses held in a frame with temples (arms) that rest over the ears. Frames come in many shapes: rectangular, round, oval, cat-eye, and more. Frame materials include plastic/acetate (often thick and colorful), metal (thin, minimal), and titanium (very lightweight). Lens shapes are typically 4–6 cm wide. Folded glasses are roughly 14–16 cm long. When placed on a surface, they rest on the lens rims and temples. Sunglasses have tinted or mirrored lenses; prescription glasses have clear or lightly tinted lenses.
+
+common use contexts:
+- Worn throughout the day by people with vision correction needs
+- Used for close reading or computer work (reading glasses, blue-light glasses)
+- Placed on a desk or folded beside a laptop when not being worn
+- Rested on the forehead or hung on a shirt collar when temporarily removed
+- Sunglasses carried or worn for outdoor use
+
+scene inference:
+Glasses on a desk beside a laptop suggest the owner is present and has removed them temporarily — perhaps to rub their eyes or take a break. Glasses alongside a book or notebook strongly suggest a reading or study scene. Blue-light blocking glasses near a computer setup suggest the user is conscious of screen fatigue. Sunglasses on an indoor desk are likely placed there after returning from outside. The presence of glasses personalizes the scene, confirming the workspace belongs to a specific individual.
+
+associated objects:
+laptop, notebook, phone, book, keys, wallet
+
+typical locations:
+on the face, desk surface, folded beside a laptop, on a book, inside a glasses case
+
+functional notes:
+Glasses are a highly personal item — their presence strongly suggests the workspace is owned and regularly used by a specific individual. A glasses case nearby indicates the person is organized about eyewear storage. The style of glasses (sleek and minimal vs. bold acetate frames) can offer soft cues about the user's aesthetic preferences.

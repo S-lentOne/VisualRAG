@@ -1,0 +1,28 @@
+class: watch
+aliases: wristwatch, smartwatch, analog watch, digital watch, Apple Watch, timepiece
+category: personal item
+
+description:
+A watch is a timekeeping device worn on the wrist. Traditional analog watches display time with hour and minute hands; digital watches show time numerically. Smartwatches add notification mirroring, fitness tracking, and app support on top of timekeeping.
+
+physical appearance:
+Watches consist of a case (the body housing the mechanism or display), a dial or screen, and a strap or bracelet. Cases are circular, square, or rectangular, typically 38–46 mm in diameter. Straps can be leather, rubber/silicone, metal link, or fabric (NATO strap). Smartwatches (Apple Watch, Galaxy Watch) are square or rounded-square with a digital touch display. Traditional analog watches have a glass face, metal case, and visible hands. Thickness ranges from 8 mm (slim dress watches) to 14 mm (sport and dive watches).
+
+common use contexts:
+- Daily timekeeping as a wrist accessory
+- Worn during work or study to monitor time without checking a phone
+- Smartwatches used to receive notifications, track exercise, and monitor health metrics
+- Fashion accessory that complements an outfit
+- Placed on a desk or nightstand when charging (smartwatch) or when the user prefers not to wear it while typing
+
+scene inference:
+A watch on a desk (off the wrist) indicates the user has removed it — common during typing-intensive work, sleeping, or exercising. A smartwatch on its charging puck or dock indicates charging behavior. A watch alongside wallet and keys forms the classic pocket/wrist dump of a person settling in. A smartwatch on a desk near a laptop suggests a tech-forward user who integrates digital and wearable devices into their workflow. An analog watch alone on a desk can be a deliberate display item if it is a high-quality timepiece.
+
+associated objects:
+phone, wallet, keys, laptop, charger
+
+typical locations:
+on the wrist, desk surface, nightstand, charging dock, inside a bag
+
+functional notes:
+A smartwatch versus a traditional watch on a desk can subtly indicate the tech-savviness of the user. Smartwatches require charging (so a charging cable or dock nearby is expected), while analog watches do not. The watch, especially when alongside keys and a wallet, is a reliable "person is present" indicator.

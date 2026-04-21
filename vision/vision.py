@@ -4,9 +4,8 @@ from matplotlib import pyplot as plt
 import os
 
 def get_camera_name(index):
-    """
-    Linux-specific: tries to read camera name
-    """
+    # Will be adding detection and use of a different logic per OS, starting with windows, however for now
+    # this is Linux-specific: tries to read camera name
     path = f"/sys/class/video4linux/video{index}/name"
     if os.path.exists(path):
         with open(path) as f:
@@ -59,6 +58,7 @@ def LiveVideo():
 
     while camera.isOpened():
         ret, frame = camera.read(1)
+        # These few modifications to frame are for mirroring and rotating the camera input
         frame = cv2.flip(frame,1)
         # frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
         
@@ -115,8 +115,9 @@ def main():
          print("Invalid Input \nRestarting \n. \n. \n.")
          main()
      return 0
-     
+    
     # LiveVideo()
+    # Uncomment this line only if the logic above fails, and you need to hard reset to a live video input
     
     
 main()

@@ -33,7 +33,11 @@ Please refer to Dataset/README.md for more info.
 
 (will be added soon)
 
+---
+## Script Information [?](action:"yet to decide")
+
 ### RAG Scripts
+
 embedder.py — loads all-MiniLM-L6-v2 once and exposes embed() for both single strings and batches. Kept separate so you can swap models in one place.
 
 knowledge_base.py — reads every .txt in documents/, chunks by word count with overlap, embeds each chunk, and upserts into ChromaDB. Re-running is safe — unchanged chunks are skipped by content hash. Adding a new class = drop a .txt file and call kb.build(). Zero code changes.

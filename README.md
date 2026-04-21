@@ -34,7 +34,7 @@ Please refer to Dataset/README.md for more info.
 (will be added soon)
 
 ---
-## Script Information [?](action:"yet to decide")
+## Script Information [?]
 
 ### RAG Scripts
 

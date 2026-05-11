@@ -1,6 +1,12 @@
 # This includes descriptions for every file
 *It's formatted to be Directory→File→Description*
 
+- **main.py**
+  - *The entry point*
+
+- **pipeline.py**
+  - *wires all three phases together into a single callable.*
+
 ### RAG
 
 - **embedder.py** 

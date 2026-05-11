@@ -1,23 +1,11 @@
-"""
-rag/retriever.py
-
-Queries the ChromaDB knowledge base to retrieve the most relevant
-context chunks for a given semantic query.
-
-Adding new classes: no changes needed — the retriever queries by
-semantic similarity, not by hardcoded class names.
-"""
-
 from dataclasses import dataclass
 from typing import Optional
 
 from rag.knowledge_base import KnowledgeBase
 from rag.embedder import Embedder
 
-
 @dataclass
 class RetrievedChunk:
-    """A single retrieved chunk with its metadata and similarity score."""
     text: str
     class_label: str
     doc_name: str
@@ -25,24 +13,8 @@ class RetrievedChunk:
     score: float          # cosine similarity (0–1, higher = more relevant)
     source_file: str
 
-
 class Retriever:
-    """
-    Retrieves the top-k most relevant knowledge chunks for a query.
-
-    Usage:
-        retriever = Retriever(knowledge_base)
-        chunks = retriever.retrieve("laptop on a desk with coffee cup", top_k=4)
-        context = retriever.format_context(chunks)
-    """
-
     def __init__(self, knowledge_base: KnowledgeBase, embedder: Optional[Embedder] = None):
-        """
-        Args:
-            knowledge_base: A built KnowledgeBase instance.
-            embedder:       Embedder to use for query embedding.
-                            Reuses the KB's embedder by default to avoid loading twice.
-        """
         self.collection = knowledge_base.get_collection()
         self.embedder = embedder or knowledge_base.embedder
 
@@ -53,20 +25,6 @@ class Retriever:
         min_score: float = 0.0,
         filter_classes: Optional[list[str]] = None,
     ) -> list[RetrievedChunk]:
-        """
-        Retrieve the top-k most relevant chunks from the knowledge base.
-
-        Args:
-            query:          The semantic search string.
-            top_k:          Maximum number of chunks to return.
-            min_score:      Minimum similarity threshold (0–1). Chunks below
-                            this score are filtered out.
-            filter_classes: If provided, restrict results to these class labels only.
-                            Useful when you want to retrieve only specific classes.
-
-        Returns:
-            List of RetrievedChunk objects, sorted by descending relevance score.
-        """
         query_embedding = self.embedder.embed_query(query).tolist()
 
         where_clause = None
@@ -116,20 +74,6 @@ class Retriever:
         classes: list[str],
         chunks_per_class: int = 1,
     ) -> list[RetrievedChunk]:
-        """
-        Retrieve the best chunk for each detected class individually.
-        This guarantees at least one relevant chunk per detected object,
-        even if some classes score lower in a broad semantic search.
-
-        Args:
-            query:            The semantic search string (shared across all classes).
-            classes:          List of class label strings to retrieve for.
-            chunks_per_class: Number of best chunks to fetch per class.
-
-        Returns:
-            Flat list of RetrievedChunk objects, one or more per class,
-            sorted by descending score.
-        """
         all_chunks = []
         for class_label in classes:
             chunks = self.retrieve(
@@ -143,16 +87,6 @@ class Retriever:
         return all_chunks
 
     def format_context(self, chunks: list[RetrievedChunk], dedupe: bool = True) -> str:
-        """
-        Format retrieved chunks into a clean context string for the LLM prompt.
-
-        Args:
-            chunks: List of RetrievedChunk objects.
-            dedupe: If True, skip duplicate chunks (same doc_name + chunk_index).
-
-        Returns:
-            Formatted multi-line string with labelled sections per class.
-        """
         seen = set()
         sections = {}
 

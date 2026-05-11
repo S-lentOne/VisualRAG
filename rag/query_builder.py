@@ -1,17 +1,5 @@
-"""
-rag/query_builder.py
-
-Converts a list of detected object labels (and optional metadata like
-scores or bounding box positions) into a semantic search query string
-suitable for the retriever.
-
-Adding new classes: no changes needed — the builder is fully data-driven.
-The templates and scene heuristics work with any label string.
-"""
-
 from dataclasses import dataclass
 from typing import Optional
-
 
 # ---------------------------------------------------------------------------
 # Scene context heuristics
@@ -58,15 +46,6 @@ _SCENE_HINTS: list[tuple[frozenset, str]] = [
 
 @dataclass
 class QueryContext:
-    """
-    Structured output from the query builder.
-
-    Attributes:
-        query:        The final semantic search string sent to the retriever.
-        labels:       The raw detected class labels used.
-        scene_hint:   The best-matching scene description (or None).
-        top_labels:   Labels sorted by detection score (highest first).
-    """
     query: str
     labels: list[str]
     scene_hint: Optional[str]
@@ -78,18 +57,6 @@ def build_query(
     scores: Optional[list[float]] = None,
     max_labels: int = 8,
 ) -> QueryContext:
-    """
-    Build a semantic search query from detected object labels.
-
-    Args:
-        labels:     List of detected class label strings (e.g. ["laptop", "cup", "notebook"]).
-        scores:     Optional confidence scores parallel to labels.
-                    If provided, labels are sorted by score descending before query building.
-        max_labels: Maximum number of labels to include in the query (avoids runaway length).
-
-    Returns:
-        QueryContext with the final query string and supporting metadata.
-    """
     if not labels:
         return QueryContext(
             query="desk workspace scene with personal items",
@@ -146,16 +113,6 @@ def build_query(
 
 
 def build_query_from_detections(detections: list[dict]) -> QueryContext:
-    """
-    Convenience wrapper that accepts a list of detection dicts.
-    Each dict should have at minimum a 'label' key, and optionally a 'score' key.
-
-    Args:
-        detections: e.g. [{"label": "laptop", "score": 0.94}, {"label": "cup", "score": 0.72}]
-
-    Returns:
-        QueryContext
-    """
     labels = [d["label"] for d in detections]
     scores = [d.get("score", 0.0) for d in detections]
     return build_query(labels, scores)

@@ -4,14 +4,16 @@ from typing import Optional
 from rag.knowledge_base import KnowledgeBase
 from rag.embedder import Embedder
 
+
 @dataclass
 class RetrievedChunk:
     text: str
     class_label: str
     doc_name: str
     chunk_index: int
-    score: float          # cosine similarity (0–1, higher = more relevant)
+    score: float
     source_file: str
+
 
 class Retriever:
     def __init__(self, knowledge_base: KnowledgeBase, embedder: Optional[Embedder] = None):
@@ -23,8 +25,14 @@ class Retriever:
         query: str,
         top_k: int = 5,
         min_score: float = 0.0,
-        filter_classes: Optional[list[str]] = None,
-    ) -> list[RetrievedChunk]:
+        filter_classes: Optional[list] = None,
+    ) -> list:
+        # guard: ChromaDB errors if n_results > collection size
+        count = self.collection.count()
+        if count == 0:
+            return []
+        n = min(top_k, count)
+
         query_embedding = self.embedder.embed_query(query).tolist()
 
         where_clause = None
@@ -36,7 +44,7 @@ class Retriever:
 
         query_kwargs = dict(
             query_embeddings=[query_embedding],
-            n_results=top_k,
+            n_results=n,
             include=["documents", "metadatas", "distances"],
         )
         if where_clause:
@@ -50,43 +58,30 @@ class Retriever:
             results["metadatas"][0],
             results["distances"][0],
         ):
-            # ChromaDB cosine distance → similarity: similarity = 1 - distance
             score = round(1.0 - distance, 4)
             if score < min_score:
                 continue
-
             chunks.append(RetrievedChunk(
                 text=text,
                 class_label=meta["class_label"],
                 doc_name=meta["doc_name"],
-                chunk_index=meta["chunk_index"],
+                chunk_index=int(meta["chunk_index"]),
                 score=score,
                 source_file=meta["source_file"],
             ))
 
-        # Already sorted by ChromaDB (nearest first), but re-sort after filtering
         chunks.sort(key=lambda c: c.score, reverse=True)
         return chunks
 
-    def retrieve_per_class(
-        self,
-        query: str,
-        classes: list[str],
-        chunks_per_class: int = 1,
-    ) -> list[RetrievedChunk]:
+    def retrieve_per_class(self, query: str, classes: list, chunks_per_class: int = 1) -> list:
         all_chunks = []
         for class_label in classes:
-            chunks = self.retrieve(
-                query=query,
-                top_k=chunks_per_class,
-                filter_classes=[class_label],
-            )
+            chunks = self.retrieve(query=query, top_k=chunks_per_class, filter_classes=[class_label])
             all_chunks.extend(chunks)
-
         all_chunks.sort(key=lambda c: c.score, reverse=True)
         return all_chunks
 
-    def format_context(self, chunks: list[RetrievedChunk], dedupe: bool = True) -> str:
+    def format_context(self, chunks: list, dedupe: bool = True) -> str:
         seen = set()
         sections = {}
 
@@ -95,17 +90,12 @@ class Retriever:
             if dedupe and key in seen:
                 continue
             seen.add(key)
-
-            label = chunk.class_label
-            if label not in sections:
-                sections[label] = []
-            sections[label].append(chunk.text.strip())
+            sections.setdefault(chunk.class_label, []).append(chunk.text.strip())
 
         lines = []
         for label, texts in sections.items():
             lines.append(f"[{label.upper()}]")
-            for text in texts:
-                lines.append(text)
-            lines.append("")   # blank line between sections
+            lines.extend(texts)
+            lines.append("")
 
         return "\n".join(lines).strip()

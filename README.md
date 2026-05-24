@@ -2,7 +2,7 @@
 
 This repo is for a project aimed to build a computer vision and deep learning based software, which provides aid to those with bad vision/memory, mostly aimed towards (but not limited to) the elderly, and visually impared. 
 
-The software accpets input in forms of Live Video (via an in-built webcam or an external webcam), a pre-recorded Video, or an Image, you can then question the bot with what you may want to know regarding the provided media.
+The software accepts input in forms of Live Video (via an in-built webcam or an external webcam), a pre-recorded Video, or an Image, you can then question the bot with what you may want to know regarding the provided media.
 
 For installation plese follow the steps given below:
 

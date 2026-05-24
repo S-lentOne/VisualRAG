@@ -36,13 +36,14 @@ def _print_result(result):
     print(f"LLM      : {result.llm_response}")
     print("─────────────────────────────────────────────────────")
 
-def _chat_loop(pipe, result, user_store, profile):
+def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False):
     user_ctx = user_store.get_context_for_llm(profile)
     pkg = build_prompt(
         detections=result.detections,
         static_context=result.static_context,
         episodic_context=result.episodic_context,
         user_context=user_ctx,
+        is_video_session=is_video_session,
     )
     history = pkg.messages + [{"role": "assistant", "content": result.llm_response}]
 
@@ -209,6 +210,7 @@ def _run_live_interactive(pipe, camera_index: int, user_store, profile):
                 static_context=result.static_context,
                 episodic_context=result.episodic_context,
                 user_context=user_ctx,
+                is_video_session=False,
             )
             with lock:
                 state["last_result"] = result
@@ -298,7 +300,7 @@ def main():
         if results:
             print("\nYou can now chat about the video.")
             session_result = _build_video_session_result(results)
-            _chat_loop(pipe, session_result, user_store, profile)
+            _chat_loop(pipe, session_result, user_store, profile, is_video_session=True)
 
     elif mode == "L":
         cams = _list_cameras()

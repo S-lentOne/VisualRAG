@@ -16,7 +16,7 @@ DEFAULT_CONFIG = {
     "model_path":         "models/tr-9.pt",
     # set to a COCO yolo model path (e.g. "models/yolov8n.pt") to enable dual detection
     # download with: from ultralytics import YOLO; YOLO("yolov8n.pt")
-    "coco_model_path":    "models/yolov8n.pt",
+    "coco_model_path":    None,
     "confidence":         0.25,
     "db_path":            "data/chroma_db",
     "static_top_k":       4,
@@ -167,6 +167,8 @@ class Pipeline:
                     changes.append(f"-{','.join(result.changes['disappeared'])}")
                 change_str = f"  [{' '.join(changes)}]" if changes else ""
                 print(f"  t={t:.1f}s  detected={labels or ['nothing']}{change_str}")
+                preview = result.llm_response[:120] + ('...' if len(result.llm_response) > 120 else '')
+                print(f"  └─ {preview}")
 
             if self.config["show_cv_window"]:
                 display = self._annotate_frame(frame, last_result) if last_result else frame

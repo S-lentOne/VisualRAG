@@ -36,6 +36,43 @@ def _print_result(result):
     print(f"LLM      : {result.llm_response}")
     print("─────────────────────────────────────────────────────")
 
+
+def _try_answer_factually(question: str, detections: list):
+    """
+    Answer simple factual questions directly from detection data,
+    bypassing the LLM entirely. Returns None if the question needs LLM reasoning.
+    """
+    q = question.lower().strip().rstrip("?")
+    labels = [d["label"] for d in detections]
+    labels_lower = [l.lower() for l in labels]
+
+    # "list all items / objects / things"
+    list_triggers = ("list", "what did you see", "what was on", "what objects", "what items", "what things", "show me everything", "all items", "all objects")
+    if any(t in q for t in list_triggers):
+        if not labels:
+            return "No objects were detected."
+        numbered = "\n".join(f"{i+1}. {l}" for i, l in enumerate(labels))
+        return f"Here are all the objects detected:\n{numbered}"
+
+    # "did you see X / were there X / was there a X"
+    yes_no_triggers = ("did you see", "were there", "was there", "did you detect", "is there", "any ")
+    if any(t in q for t in yes_no_triggers):
+        # try to match any detected label against the question
+        for label in labels_lower:
+            if label in q or label.rstrip("s") in q:
+                return f"Yes, {label} was detected on camera."
+        # check if question mentions something not in detections
+        # only give a hard no if we can identify the object being asked about
+        common = ["laptop","notebook","mouse","pen","bottle","monitor","keyboard",
+                  "headphones","chair","phone","cup","backpack","controller","camera",
+                  "speaker","wallet","watch","glasses","earbuds","charger","wire",
+                  "eraser","ruler","calculator","paper","plant","spoon","chopsticks","can"]
+        for obj in common:
+            if obj in q or obj.rstrip("s") in q:
+                if obj not in labels_lower:
+                    return f"No, {obj} was not detected on camera during this session."
+    return None
+
 def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False):
     user_ctx = user_store.get_context_for_llm(profile)
     pkg = build_prompt(
@@ -60,6 +97,14 @@ def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False
         if not q:
             print("Ending chat.")
             break
+        # answer simple factual questions from detection data — don't trust the LLM for these
+        factual = _try_answer_factually(q, result.detections)
+        if factual:
+            print(f"LLM: {factual}\n")
+            history.append({"role": "user", "content": q})
+            history.append({"role": "assistant", "content": factual})
+            profile = user_store.record_exchange(profile, q, factual)
+            continue
         history = build_followup_prompt(history, q)
         answer = pipe.llm.chat(history)
         print(f"LLM: {answer}\n")

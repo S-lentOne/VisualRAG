@@ -3,7 +3,7 @@ import sys
 import cv2
 import threading
 import queue
-from pipeline import Pipeline
+from pipeline import Pipeline, PipelineResult
 from llm.prompt_builder import build_prompt, build_followup_prompt
 from rag.user_store import UserStore
 
@@ -37,7 +37,6 @@ def _print_result(result):
     print("─────────────────────────────────────────────────────")
 
 def _chat_loop(pipe, result, user_store, profile):
-    """Stateful chat with full history — model remembers the whole conversation."""
     user_ctx = user_store.get_context_for_llm(profile)
     pkg = build_prompt(
         detections=result.detections,
@@ -47,7 +46,6 @@ def _chat_loop(pipe, result, user_store, profile):
     )
     history = pkg.messages + [{"role": "assistant", "content": result.llm_response}]
 
-    # record all detected labels into user profile
     labels = [d["label"] for d in result.detections]
     profile = user_store.record_detections(profile, labels)
     profile = user_store.update_scene_summary(profile, result.llm_response)
@@ -72,7 +70,6 @@ def _chat_loop(pipe, result, user_store, profile):
 
 
 def _video_summary(results: list):
-    """Print a clean summary of what was seen across the whole video."""
     print("\n── Video Summary ────────────────────────────────────")
     all_labels = {}
     for r in results:
@@ -90,11 +87,69 @@ def _video_summary(results: list):
     print("─────────────────────────────────────────────────────")
 
 
+def _build_video_session_result(results: list) -> PipelineResult:
+    """
+    Aggregate all per-frame results into one unified context for post-video chat.
+    The LLM will know about every object seen across the entire video, not just the last frame.
+    """
+    # tally all labels, keep highest confidence score seen for each
+    label_counts = {}
+    label_best_score = {}
+    for r in results:
+        for d in r.detections:
+            lbl = d["label"]
+            label_counts[lbl] = label_counts.get(lbl, 0) + 1
+            label_best_score[lbl] = max(label_best_score.get(lbl, 0.0), d["score"])
+
+    # rank by frequency then score
+    ranked = sorted(label_counts.keys(), key=lambda l: (-label_counts[l], -label_best_score[l]))
+    aggregated_detections = [
+        {"label": l, "score": label_best_score[l], "bbox": [0, 0, 0, 0]}
+        for l in ranked
+    ]
+
+    # combine static context blocks, deduplicated by class label header
+    seen_headers = set()
+    static_blocks = []
+    for r in results:
+        for block in r.static_context.split("\n\n"):
+            header = block.strip().splitlines()[0] if block.strip() else ""
+            if header.startswith("[") and header not in seen_headers:
+                seen_headers.add(header)
+                static_blocks.append(block.strip())
+    combined_static = "\n\n".join(static_blocks)
+
+    # frequency note + per-scene narrative timeline for episodic context
+    freq_note = "Object frequency across video: " + ", ".join(
+        f"{l} ({label_counts[l]}x)" for l in ranked
+    )
+    timeline = "\n\n".join(
+        f"Scene {i+1}: {r.llm_response}" for i, r in enumerate(results) if r.llm_response
+    )
+    combined_episodic = freq_note + "\n\n" + timeline
+
+    # union of all appeared/disappeared across session
+    all_appeared = set()
+    all_disappeared = set()
+    for r in results:
+        all_appeared.update(r.changes.get("appeared", []))
+        all_disappeared.update(r.changes.get("disappeared", []))
+
+    return PipelineResult(
+        detections=aggregated_detections,
+        scene_query=f"video session — {len(results)} scenes analyzed",
+        static_context=combined_static,
+        episodic_context=combined_episodic,
+        llm_response=results[-1].llm_response if results else "",
+        changes={
+            "appeared":    sorted(all_appeared),
+            "disappeared": sorted(all_disappeared),
+            "stable":      [],
+        },
+    )
+
+
 def _run_live_interactive(pipe, camera_index: int, user_store, profile):
-    """
-    Two threads: camera loop (capture + analyze + update episodic memory)
-    and input thread (listen for questions, answer using latest scene context).
-    """
     backend = cv2.CAP_DSHOW if sys.platform == "win32" else cv2.CAP_V4L2
     cap = cv2.VideoCapture(camera_index, backend)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
@@ -104,11 +159,7 @@ def _run_live_interactive(pipe, camera_index: int, user_store, profile):
         print(f"Could not open camera {camera_index}.")
         return
 
-    state = {
-        "last_result": None,
-        "chat_history": [],
-        "running": True,
-    }
+    state = {"last_result": None, "chat_history": [], "running": True}
     lock = threading.Lock()
     question_queue = queue.Queue()
 
@@ -149,7 +200,6 @@ def _run_live_interactive(pipe, camera_index: int, user_store, profile):
             detections = pipe._detect(frame)
             result = pipe._analyze(detections)
 
-            # update user profile with new detections
             labels = [d["label"] for d in result.detections]
             user_store.record_detections(profile, labels)
 
@@ -162,14 +212,12 @@ def _run_live_interactive(pipe, camera_index: int, user_store, profile):
             )
             with lock:
                 state["last_result"] = result
-                # reset chat history to new scene — keeps Q&A grounded to current view
                 state["chat_history"] = pkg.messages + [
                     {"role": "assistant", "content": result.llm_response}
                 ]
 
             _print_result(result)
 
-        # answer queued questions
         while not question_queue.empty():
             q = question_queue.get()
             with lock:
@@ -211,7 +259,6 @@ def main():
     print("║   Object Detection + RAG + Ollama    ║")
     print("╚══════════════════════════════════════╝\n")
 
-    # user identity — in website mode this comes from auth
     user_store = UserStore()
     user_id = input("Username (or Enter for 'guest'): ").strip() or "guest"
     profile = user_store.load(user_id)
@@ -250,7 +297,8 @@ def main():
         _video_summary(results)
         if results:
             print("\nYou can now chat about the video.")
-            _chat_loop(pipe, results[-1], user_store, profile)
+            session_result = _build_video_session_result(results)
+            _chat_loop(pipe, session_result, user_store, profile)
 
     elif mode == "L":
         cams = _list_cameras()

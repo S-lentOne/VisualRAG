@@ -130,6 +130,12 @@ class Pipeline:
         return result
 
     def run_video(self, path: str) -> list:
+        """
+        Two-pass video processing:
+          Pass 1 — YOLO only, reads every frame at full speed, collects sampled detections
+          Pass 2 — LLM analysis on the collected detection snapshots
+        This prevents Ollama's response time from skewing which frames get analyzed.
+        """
         self._check_ready()
         cap = cv2.VideoCapture(path)
         if not cap.isOpened():
@@ -139,46 +145,56 @@ class Pipeline:
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         duration = total_frames / fps
         print(f"[Video] {total_frames} frames, {fps:.0f}fps, ~{duration:.1f}s")
-        print(f"[Video] Analyzing every {self.config['frame_interval']} frames...\n")
+        print(f"[Video] Pass 1: running YOLO on every {self.config['frame_interval']} frames...")
 
-        results = []
+        # pass 1 — pure detection, no LLM, no blocking
+        snapshots = []  # list of (timestamp, detections, frame)
         frame_count = 0
-        last_result = None
+        last_frame = None
 
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
-
             frame_count += 1
+            last_frame = frame
 
             if frame_count % self.config["frame_interval"] == 0:
-                detections = self._detect(frame)
-                result = self._analyze(detections)
-                results.append(result)
-                last_result = result
-
-                labels = [d["label"] for d in result.detections]
                 t = frame_count / fps
-                changes = []
-                if result.changes["appeared"]:
-                    changes.append(f"+{','.join(result.changes['appeared'])}")
-                if result.changes["disappeared"]:
-                    changes.append(f"-{','.join(result.changes['disappeared'])}")
-                change_str = f"  [{' '.join(changes)}]" if changes else ""
-                print(f"  t={t:.1f}s  detected={labels or ['nothing']}{change_str}")
-                preview = result.llm_response[:120] + ('...' if len(result.llm_response) > 120 else '')
-                print(f"  └─ {preview}")
-
-            if self.config["show_cv_window"]:
-                display = self._annotate_frame(frame, last_result) if last_result else frame
-                cv2.imshow("Video — VisualRAG", display)
-                if cv2.waitKey(1) & 0xFF == ord("q"):
-                    break
+                detections = self._detect(frame)
+                snapshots.append((t, detections, frame.copy()))
+                labels = [d["label"] for d in detections]
+                print(f"  t={t:.1f}s  detected={labels or ['nothing']}")
 
         cap.release()
+        print(f"[Video] Pass 1 done. {len(snapshots)} snapshots collected.")
+        print(f"[Video] Pass 2: running RAG + LLM on each snapshot...\n")
+
+        # pass 2 — RAG + LLM on each snapshot sequentially
+        results = []
+        last_result = None
+        for i, (t, detections, frame) in enumerate(snapshots):
+            result = self._analyze(detections)
+            results.append(result)
+            last_result = result
+
+            labels = [d["label"] for d in result.detections]
+            changes = []
+            if result.changes["appeared"]:
+                changes.append(f"+{','.join(result.changes['appeared'])}")
+            if result.changes["disappeared"]:
+                changes.append(f"-{','.join(result.changes['disappeared'])}")
+            change_str = f"  [{' '.join(changes)}]" if changes else ""
+            print(f"  [{i+1}/{len(snapshots)}] t={t:.1f}s  {labels or ['nothing']}{change_str}")
+            print(f"  └─ {result.llm_response}\n")
+
+            if self.config["show_cv_window"]:
+                display = self._annotate_frame(frame, result)
+                cv2.imshow("Video — VisualRAG", display)
+                cv2.waitKey(1)
+
         cv2.destroyAllWindows()
-        print(f"\n[Video] Done. {len(results)} scenes analyzed.")
+        print(f"[Video] Done. {len(results)} scenes analyzed.")
         return results
 
     def run_live(self, camera_index: int = 0, on_result: Optional[Callable] = None):

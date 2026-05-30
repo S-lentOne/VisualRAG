@@ -195,17 +195,15 @@ def _run_live(pipe, camera_index, user_store, profile):
     # shared between display and analysis threads
     shared = {
         "latest_frame":   None,   # always the newest raw frame
-        "overlay_result": None,   # last PipelineResult for drawing boxes
+        "overlay_result": None,
+        "live_detections":  [],    # per-frame YOLO results for real-time boxes
         "chat_history":   [],
         "last_result":    None,
         "lock":           threading.Lock(),
     }
 
-    # ── display thread: reads camera at full FPS ──────────────────────────────
+    # ── display thread: reads camera at full FPS, runs YOLO on every frame ──────
     def display_worker():
-        frame_count = 0
-        interval    = pipe.config["frame_interval"]
-
         while not stop_event.is_set():
             ret, frame = cap.read()
             if not ret:
@@ -213,22 +211,29 @@ def _run_live(pipe, camera_index, user_store, profile):
                 break
 
             frame = cv2.flip(frame, 1)
-            frame_count += 1
+
+            # always run YOLO on every frame so boxes are frame-accurate
+            live_detections = pipe._detect(frame)
 
             with shared["lock"]:
-                shared["latest_frame"] = frame.copy()
-                result = shared["overlay_result"]
+                shared["latest_frame"]      = frame.copy()
+                shared["live_detections"]   = live_detections
 
-            # draw boxes on current frame using latest analysis result
-            display = pipe._annotate_frame_minimal(frame, result)
+            # draw boxes from live per-frame detection
+            display = frame.copy()
+            h, w = display.shape[:2]
+            for d in live_detections:
+                x1 = int(d["bbox"][0] * w)
+                y1 = int(d["bbox"][1] * h)
+                x2 = int(d["bbox"][2] * w)
+                y2 = int(d["bbox"][3] * h)
+                cv2.rectangle(display, (x1, y1), (x2, y2), (0, 200, 100), 2)
+                cv2.putText(display, f"{d['label']} {d['score']:.0%}",
+                            (x1, max(y1 - 6, 12)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 200, 100), 2)
 
-            # show current detections in window title — no stdout
-            if result and result.detections:
-                labels = ", ".join(d["label"] for d in result.detections)
-                cv2.setWindowTitle("VisualRAG — Live", f"VisualRAG  |  {labels}")
-            else:
-                cv2.setWindowTitle("VisualRAG — Live", "VisualRAG  |  no detections")
-
+            labels = ", ".join(d["label"] for d in live_detections) if live_detections else "no detections"
+            cv2.setWindowTitle("VisualRAG — Live", f"VisualRAG  |  {labels}")
             cv2.imshow("VisualRAG — Live", display)
 
             if cv2.waitKey(1) & 0xFF == ord("q"):
@@ -237,27 +242,19 @@ def _run_live(pipe, camera_index, user_store, profile):
 
         cv2.destroyAllWindows()
 
-    # ── analysis thread: YOLO + RAG + LLM on sampled frames ──────────────────
+    # ── analysis thread: RAG + LLM on sampled detections (no YOLO here) ─────────
     def analysis_worker():
-        sample_count = 0
-        interval     = pipe.config["frame_interval"]
-        local_frame_count = 0
-
+        interval = pipe.config["frame_interval"] * 0.033  # seconds between analyses
         while not stop_event.is_set():
-            time.sleep(0.01)  # ~100 Hz polling
-            local_frame_count += 1
-
-            if local_frame_count % interval != 0:
-                continue
+            time.sleep(interval)
 
             with shared["lock"]:
-                frame = shared["latest_frame"]
-            if frame is None:
-                continue
+                detections = list(shared["live_detections"])
+            if not detections and shared["last_result"] is not None:
+                # nothing detected — still update episodic memory with empty scene
+                pass
 
-            sample_count += 1
-            detections = pipe._detect(frame)
-            result     = pipe._analyze(detections)
+            result = pipe._analyze(detections)
 
             user_store.record_detections(profile, [d["label"] for d in result.detections])
             user_ctx = user_store.get_context_for_llm(profile)

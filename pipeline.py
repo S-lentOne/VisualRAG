@@ -14,10 +14,11 @@ from llm.prompt_builder import build_followup_prompt
 
 DEFAULT_CONFIG = {
     "model_path":         "models/tr-9.pt",
-    # set to a COCO yolo model path (e.g. "models/yolov8n.pt") to enable dual detection
-    # download with: from ultralytics import YOLO; YOLO("yolov8n.pt")
-    "coco_model_path":    None,
-    "confidence":         0.25,
+    # detection_mode: "custom" | "coco" | "dual"
+    "detection_mode":     "coco",
+    # yolov8s.pt is 22MB with significantly better accuracy than nano — recommended
+    "coco_model_path":    "yolov8s.pt",
+    "confidence":         0.35,
     "db_path":            "data/chroma_db",
     "static_top_k":       4,
     "episodic_top_k":     3,
@@ -31,22 +32,37 @@ DEFAULT_CONFIG = {
 }
 
 # COCO classes that overlap well with our 30 — used to merge dual-model results cleanly
+# maps every COCO class name to our vocabulary
+# unmapped COCO classes are dropped so only relevant objects appear
 _COCO_TO_OURS = {
-    "laptop":       "laptop",
-    "keyboard":     "keyboard",
-    "mouse":        "mouse",
-    "tv":           "monitor",
-    "monitor":      "monitor",
-    "cell phone":   "phone",
-    "backpack":     "backpack",
-    "handbag":      "backpack",
-    "cup":          "cup",
-    "bottle":       "bottle",
-    "chair":        "chair",
-    "book":         "notebook",
-    "clock":        "watch",
-    "scissors":     "ruler",
-    "remote":       "controller",
+    "laptop":           "laptop",
+    "keyboard":         "keyboard",
+    "mouse":            "mouse",
+    "tv":               "monitor",
+    "monitor":          "monitor",
+    "cell phone":       "phone",
+    "backpack":         "backpack",
+    "handbag":          "backpack",
+    "suitcase":         "backpack",
+    "cup":              "cup",
+    "bottle":           "bottle",
+    "wine glass":       "cup",
+    "chair":            "chair",
+    "book":             "notebook",
+    "clock":            "watch",
+    "scissors":         "ruler",
+    "remote":           "controller",
+    "headphones":       "headphones",   # present in some COCO variants
+    "earphones":        "earbuds",
+    "potted plant":     "plant",
+    "vase":             "plant",
+    "spoon":            "spoon",
+    "fork":             "spoon",        # close enough for scene context
+    "bowl":             "cup",
+    "pen":              "pen",
+    "pencil":           "pen",
+    "tie":              "watch",        # not ideal but avoids dropping formal wear
+    "umbrella":         "backpack",     # if visible, indicates person is out and about
 }
 
 
@@ -75,13 +91,18 @@ class Pipeline:
     def setup(self):
         cfg = self.config
 
-        print("[Pipeline] Loading YOLO model...")
-        self.model = YOLO(cfg["model_path"])
+        print("[Pipeline] Loading detection model(s)...")
+        mode = cfg["detection_mode"]
 
-        if cfg["coco_model_path"]:
-            print(f"[Pipeline] Loading COCO model: {cfg['coco_model_path']}")
+        if mode in ("custom", "dual"):
+            self.model = YOLO(cfg["model_path"])
+            print(f"[Pipeline] Custom model loaded: {cfg['model_path']}")
+
+        if mode in ("coco", "dual"):
             self.coco_model = YOLO(cfg["coco_model_path"])
-            print("[Pipeline] Dual-model detection enabled.")
+            print(f"[Pipeline] COCO model loaded: {cfg['coco_model_path']}")
+
+        print(f"[Pipeline] Detection mode: {mode}")
 
         print("[Pipeline] Initializing RAG...")
         embedder = Embedder()
@@ -249,25 +270,36 @@ class Pipeline:
         cv2.destroyAllWindows()
 
     def _detect(self, frame) -> list:
-        detections = self._run_model(self.model, frame)
+        mode = self.config["detection_mode"]
 
-        # merge COCO detections if second model is loaded
-        if self.coco_model:
-            coco_raw = self._run_model(self.coco_model, frame)
-            existing_labels = {d["label"] for d in detections}
-            for d in coco_raw:
+        if mode == "custom":
+            detections = self._run_model(self.model, frame)
+
+        elif mode == "coco":
+            # use COCO model, map labels to our vocabulary, drop anything not in our classes
+            raw = self._run_model(self.coco_model, frame)
+            detections = []
+            for d in raw:
                 mapped = _COCO_TO_OURS.get(d["label"])
-                # add COCO detection only if it maps to one of our classes and isn't already detected
-                if mapped and mapped not in existing_labels:
+                if mapped:
                     d["label"] = mapped
                     detections.append(d)
-                    existing_labels.add(mapped)
+
+        else:  # dual
+            detections = self._run_model(self.model, frame)
+            existing = {d["label"] for d in detections}
+            for d in self._run_model(self.coco_model, frame):
+                mapped = _COCO_TO_OURS.get(d["label"])
+                if mapped and mapped not in existing:
+                    d["label"] = mapped
+                    detections.append(d)
+                    existing.add(mapped)
 
         detections.sort(key=lambda d: -d["score"])
         return detections
 
     def _run_model(self, model, frame) -> list:
-        results = model(frame, conf=self.config["confidence"])[0]
+        results = model(frame, conf=self.config["confidence"], verbose=False)[0]
         out = []
         for box in results.boxes:
             label = model.names[int(box.cls)]

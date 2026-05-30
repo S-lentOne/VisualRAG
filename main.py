@@ -3,10 +3,12 @@ import sys
 import cv2
 import threading
 import queue
+import time
 from pipeline import Pipeline, PipelineResult
 from llm.prompt_builder import build_prompt, build_followup_prompt
 from rag.user_store import UserStore
 
+# ── helpers ───────────────────────────────────────────────────────────────────
 
 def _get_camera_name(index):
     path = f"/sys/class/video4linux/video{index}/name"
@@ -25,6 +27,35 @@ def _list_cameras(max_tested=10):
             cap.release()
     return cameras
 
+def _try_answer_factually(question, detections):
+    q = question.lower().strip().rstrip("?")
+    labels = [d["label"] for d in detections]
+    labels_lower = [l.lower() for l in labels]
+
+    list_triggers = ("list", "what did you see", "what was on", "what objects",
+                     "what items", "what things", "show me everything", "all items", "all objects")
+    if any(t in q for t in list_triggers):
+        if not labels:
+            return "No objects were detected."
+        return "Detected objects:\n" + "\n".join(f"{i+1}. {l}" for i, l in enumerate(labels))
+
+    yes_no_triggers = ("did you see", "were there", "was there", "did you detect", "is there", "any ")
+    if any(t in q for t in yes_no_triggers):
+        for label in labels_lower:
+            if label in q or label.rstrip("s") in q:
+                return f"Yes, {label} was detected on camera."
+        known = ["laptop","notebook","mouse","pen","bottle","monitor","keyboard","headphones",
+                 "chair","phone","cup","backpack","controller","camera","speaker","wallet",
+                 "watch","glasses","earbuds","charger","wire","eraser","ruler","calculator",
+                 "paper","plant","spoon","chopsticks","can","key"]
+        for obj in known:
+            if obj in q or obj.rstrip("s") in q:
+                if obj not in labels_lower:
+                    return f"No, {obj} was not detected on camera."
+    return None
+
+# ── image mode ────────────────────────────────────────────────────────────────
+
 def _print_result(result):
     print("\n── Scene Analysis ───────────────────────────────────")
     labels = [f"{d['label']} ({d['score']:.0%})" for d in result.detections]
@@ -36,44 +67,7 @@ def _print_result(result):
     print(f"LLM      : {result.llm_response}")
     print("─────────────────────────────────────────────────────")
 
-
-def _try_answer_factually(question: str, detections: list):
-    """
-    Answer simple factual questions directly from detection data,
-    bypassing the LLM entirely. Returns None if the question needs LLM reasoning.
-    """
-    q = question.lower().strip().rstrip("?")
-    labels = [d["label"] for d in detections]
-    labels_lower = [l.lower() for l in labels]
-
-    # "list all items / objects / things"
-    list_triggers = ("list", "what did you see", "what was on", "what objects", "what items", "what things", "show me everything", "all items", "all objects")
-    if any(t in q for t in list_triggers):
-        if not labels:
-            return "No objects were detected."
-        numbered = "\n".join(f"{i+1}. {l}" for i, l in enumerate(labels))
-        return f"Here are all the objects detected:\n{numbered}"
-
-    # "did you see X / were there X / was there a X"
-    yes_no_triggers = ("did you see", "were there", "was there", "did you detect", "is there", "any ")
-    if any(t in q for t in yes_no_triggers):
-        # try to match any detected label against the question
-        for label in labels_lower:
-            if label in q or label.rstrip("s") in q:
-                return f"Yes, {label} was detected on camera."
-        # check if question mentions something not in detections
-        # only give a hard no if we can identify the object being asked about
-        common = ["laptop","notebook","mouse","pen","bottle","monitor","keyboard",
-                  "headphones","chair","phone","cup","backpack","controller","camera",
-                  "speaker","wallet","watch","glasses","earbuds","charger","wire",
-                  "eraser","ruler","calculator","paper","plant","spoon","chopsticks","can"]
-        for obj in common:
-            if obj in q or obj.rstrip("s") in q:
-                if obj not in labels_lower:
-                    return f"No, {obj} was not detected on camera during this session."
-    return None
-
-def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False):
+def _chat_loop(pipe, result, user_store, profile, is_video_session=False):
     user_ctx = user_store.get_context_for_llm(profile)
     pkg = build_prompt(
         detections=result.detections,
@@ -83,12 +77,10 @@ def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False
         is_video_session=is_video_session,
     )
     history = pkg.messages + [{"role": "assistant", "content": result.llm_response}]
-
-    labels = [d["label"] for d in result.detections]
-    profile = user_store.record_detections(profile, labels)
+    profile = user_store.record_detections(profile, [d["label"] for d in result.detections])
     profile = user_store.update_scene_summary(profile, result.llm_response)
 
-    print("\n── Chat (press Enter on empty line to quit) ─────────")
+    print("\n── Chat (empty Enter to quit) ───────────────────────")
     while True:
         try:
             q = input("You: ").strip()
@@ -97,12 +89,11 @@ def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False
         if not q:
             print("Ending chat.")
             break
-        # answer simple factual questions from detection data — don't trust the LLM for these
         factual = _try_answer_factually(q, result.detections)
         if factual:
             print(f"LLM: {factual}\n")
-            history.append({"role": "user", "content": q})
-            history.append({"role": "assistant", "content": factual})
+            history += [{"role": "user", "content": q},
+                        {"role": "assistant", "content": factual}]
             profile = user_store.record_exchange(profile, q, factual)
             continue
         history = build_followup_prompt(history, q)
@@ -112,10 +103,11 @@ def _chat_loop(pipe, result, user_store, profile, is_video_session: bool = False
         profile = user_store.record_exchange(profile, q, answer)
 
     user_store.save(profile)
-    print(f"[Profile] Session saved for '{profile.user_id}'.")
+    print(f"[Profile] Saved for '{profile.user_id}'.")
 
+# ── video mode ────────────────────────────────────────────────────────────────
 
-def _video_summary(results: list):
+def _video_summary(results):
     print("\n── Video Summary ────────────────────────────────────")
     all_labels = {}
     for r in results:
@@ -128,178 +120,259 @@ def _video_summary(results: list):
         print("Objects seen : nothing detected")
     print(f"Scenes analyzed : {len(results)}")
     if results:
-        print(f"\nFinal scene description:")
-        print(f"  {results[-1].llm_response}")
+        print(f"\nFinal description:\n  {results[-1].llm_response}")
     print("─────────────────────────────────────────────────────")
 
-
-def _build_video_session_result(results: list) -> PipelineResult:
-    """
-    Aggregate all per-frame results into one unified context for post-video chat.
-    The LLM will know about every object seen across the entire video, not just the last frame.
-    """
-    # tally all labels, keep highest confidence score seen for each
-    label_counts = {}
-    label_best_score = {}
+def _build_video_session_result(results):
+    label_counts, label_best = {}, {}
     for r in results:
         for d in r.detections:
-            lbl = d["label"]
-            label_counts[lbl] = label_counts.get(lbl, 0) + 1
-            label_best_score[lbl] = max(label_best_score.get(lbl, 0.0), d["score"])
+            l = d["label"]
+            label_counts[l] = label_counts.get(l, 0) + 1
+            label_best[l] = max(label_best.get(l, 0.0), d["score"])
 
-    # rank by frequency then score
-    ranked = sorted(label_counts.keys(), key=lambda l: (-label_counts[l], -label_best_score[l]))
-    aggregated_detections = [
-        {"label": l, "score": label_best_score[l], "bbox": [0, 0, 0, 0]}
-        for l in ranked
-    ]
+    ranked = sorted(label_counts, key=lambda l: (-label_counts[l], -label_best[l]))
+    agg = [{"label": l, "score": label_best[l], "bbox": [0,0,0,0]} for l in ranked]
 
-    # combine static context blocks, deduplicated by class label header
-    seen_headers = set()
-    static_blocks = []
+    seen, static_blocks = set(), []
     for r in results:
         for block in r.static_context.split("\n\n"):
-            header = block.strip().splitlines()[0] if block.strip() else ""
-            if header.startswith("[") and header not in seen_headers:
-                seen_headers.add(header)
+            h = block.strip().splitlines()[0] if block.strip() else ""
+            if h.startswith("[") and h not in seen:
+                seen.add(h)
                 static_blocks.append(block.strip())
-    combined_static = "\n\n".join(static_blocks)
 
-    # frequency note + per-scene narrative timeline for episodic context
-    freq_note = "Object frequency across video: " + ", ".join(
-        f"{l} ({label_counts[l]}x)" for l in ranked
-    )
-    timeline = "\n\n".join(
-        f"Scene {i+1}: {r.llm_response}" for i, r in enumerate(results) if r.llm_response
-    )
-    combined_episodic = freq_note + "\n\n" + timeline
-
-    # union of all appeared/disappeared across session
-    all_appeared = set()
-    all_disappeared = set()
+    freq = "Object frequency: " + ", ".join(f"{l}({label_counts[l]}x)" for l in ranked)
+    timeline = "\n\n".join(f"Scene {i+1}: {r.llm_response}" for i, r in enumerate(results) if r.llm_response)
+    all_app, all_dis = set(), set()
     for r in results:
-        all_appeared.update(r.changes.get("appeared", []))
-        all_disappeared.update(r.changes.get("disappeared", []))
+        all_app.update(r.changes.get("appeared", []))
+        all_dis.update(r.changes.get("disappeared", []))
 
     return PipelineResult(
-        detections=aggregated_detections,
-        scene_query=f"video session — {len(results)} scenes analyzed",
-        static_context=combined_static,
-        episodic_context=combined_episodic,
+        detections=agg,
+        scene_query=f"video session — {len(results)} scenes",
+        static_context="\n\n".join(static_blocks),
+        episodic_context=freq + "\n\n" + timeline,
         llm_response=results[-1].llm_response if results else "",
-        changes={
-            "appeared":    sorted(all_appeared),
-            "disappeared": sorted(all_disappeared),
-            "stable":      [],
-        },
+        changes={"appeared": sorted(all_app), "disappeared": sorted(all_dis), "stable": []},
     )
 
+# ── live mode ─────────────────────────────────────────────────────────────────
 
-def _run_live_interactive(pipe, camera_index: int, user_store, profile):
+def _run_live(pipe, camera_index, user_store, profile):
+    """
+    Three threads:
+      display thread  — reads camera at full FPS, shows annotated window continuously
+      analysis thread — pulls latest frame every N frames, runs YOLO + RAG + LLM
+      input thread    — dedicated to stdin only, never touched by other threads
+
+    No detection prints go to stdout. Status is shown only in the CV window title
+    and in a print AFTER the user presses Enter, so it never breaks the input line.
+    """
     backend = cv2.CAP_DSHOW if sys.platform == "win32" else cv2.CAP_V4L2
     cap = cv2.VideoCapture(camera_index, backend)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+    cap.set(cv2.CAP_PROP_FPS, 30)
 
     if not cap.isOpened():
         print(f"Could not open camera {camera_index}.")
         return
 
-    state = {"last_result": None, "chat_history": [], "running": True}
-    lock = threading.Lock()
+    actual_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    actual_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    print(f"[Live] Camera opened at {actual_w}x{actual_h}")
+    print("[Live] Video window open. Press Q in the window or type 'quit' to stop.\n")
+    print("─" * 52)
+    print("  Type your questions below at any time.")
+    print("─" * 52 + "\n")
+
+    stop_event     = threading.Event()
     question_queue = queue.Queue()
+    answer_queue   = queue.Queue()
 
-    def input_thread():
-        print("\n── Live Chat (type questions anytime, 'quit' to stop) ──")
-        while True:
-            try:
-                q = input("You: ").strip()
-            except (KeyboardInterrupt, EOFError):
-                break
-            if q.lower() in ("quit", "exit", "q"):
-                with lock:
-                    state["running"] = False
-                break
-            if q:
-                question_queue.put(q)
+    # shared between display and analysis threads
+    shared = {
+        "latest_frame":   None,   # always the newest raw frame
+        "overlay_result": None,   # last PipelineResult for drawing boxes
+        "chat_history":   [],
+        "last_result":    None,
+        "lock":           threading.Lock(),
+    }
 
-    t = threading.Thread(target=input_thread, daemon=True)
-    t.start()
+    # ── display thread: reads camera at full FPS ──────────────────────────────
+    def display_worker():
+        frame_count = 0
+        interval    = pipe.config["frame_interval"]
 
-    frame_count = 0
-    interval = pipe.config["frame_interval"]
-    print("[Live] Feed running. Press Q in video window or type 'quit' to stop.\n")
-
-    while True:
-        with lock:
-            if not state["running"]:
+        while not stop_event.is_set():
+            ret, frame = cap.read()
+            if not ret:
+                stop_event.set()
                 break
 
-        ret, frame = cap.read()
-        if not ret:
-            break
+            frame = cv2.flip(frame, 1)
+            frame_count += 1
 
-        frame = cv2.flip(frame, 1)
-        frame_count += 1
+            with shared["lock"]:
+                shared["latest_frame"] = frame.copy()
+                result = shared["overlay_result"]
 
-        if frame_count % interval == 0:
+            # draw boxes on current frame using latest analysis result
+            display = pipe._annotate_frame_minimal(frame, result)
+
+            # show current detections in window title — no stdout
+            if result and result.detections:
+                labels = ", ".join(d["label"] for d in result.detections)
+                cv2.setWindowTitle("VisualRAG — Live", f"VisualRAG  |  {labels}")
+            else:
+                cv2.setWindowTitle("VisualRAG — Live", "VisualRAG  |  no detections")
+
+            cv2.imshow("VisualRAG — Live", display)
+
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                stop_event.set()
+                break
+
+        cv2.destroyAllWindows()
+
+    # ── analysis thread: YOLO + RAG + LLM on sampled frames ──────────────────
+    def analysis_worker():
+        sample_count = 0
+        interval     = pipe.config["frame_interval"]
+        local_frame_count = 0
+
+        while not stop_event.is_set():
+            time.sleep(0.01)  # ~100 Hz polling
+            local_frame_count += 1
+
+            if local_frame_count % interval != 0:
+                continue
+
+            with shared["lock"]:
+                frame = shared["latest_frame"]
+            if frame is None:
+                continue
+
+            sample_count += 1
             detections = pipe._detect(frame)
-            result = pipe._analyze(detections)
+            result     = pipe._analyze(detections)
 
-            labels = [d["label"] for d in result.detections]
-            user_store.record_detections(profile, labels)
-
+            user_store.record_detections(profile, [d["label"] for d in result.detections])
             user_ctx = user_store.get_context_for_llm(profile)
             pkg = build_prompt(
                 detections=result.detections,
                 static_context=result.static_context,
                 episodic_context=result.episodic_context,
                 user_context=user_ctx,
-                is_video_session=False,
             )
-            with lock:
-                state["last_result"] = result
-                state["chat_history"] = pkg.messages + [
+
+            with shared["lock"]:
+                shared["overlay_result"] = result
+                shared["last_result"]    = result
+                shared["chat_history"]   = pkg.messages + [
                     {"role": "assistant", "content": result.llm_response}
                 ]
 
-            _print_result(result)
+    # ── input thread: owns stdin completely ───────────────────────────────────
+    def input_worker():
+        while not stop_event.is_set():
+            try:
+                sys.stdout.write("You: ")
+                sys.stdout.flush()
+                line = sys.stdin.readline()
+                if not line:
+                    stop_event.set()
+                    break
 
-        while not question_queue.empty():
-            q = question_queue.get()
-            with lock:
-                history = list(state["chat_history"])
-                has_result = state["last_result"] is not None
+                q = line.strip()
+                if not q:
+                    continue
+                if q.lower() in ("quit", "exit", "q"):
+                    stop_event.set()
+                    break
 
-            if not has_result:
-                print("LLM: Still warming up, no scene analyzed yet.\n")
+                question_queue.put(q)
+
+                # block here until answer arrives — no other thread prints during this
+                try:
+                    answer = answer_queue.get(timeout=60)
+                    # print detection status first so user sees what the answer is based on
+                    with shared["lock"]:
+                        cur = shared["last_result"]
+                    if cur and cur.detections:
+                        labels = ", ".join(d["label"] for d in cur.detections)
+                        print(f"[Current detections: {labels}]")
+                    print(f"LLM: {answer}\n")
+                except queue.Empty:
+                    print("[No response — Ollama may be slow. Try again.]\n")
+
+            except (KeyboardInterrupt, EOFError):
+                stop_event.set()
+                break
+
+    # ── answer worker: processes questions from input thread ──────────────────
+    def answer_worker():
+        while not stop_event.is_set():
+            try:
+                q = question_queue.get(timeout=0.5)
+            except queue.Empty:
                 continue
 
-            updated = build_followup_prompt(history, q)
-            answer = pipe.llm.chat(updated)
-            print(f"LLM: {answer}\n")
-            profile = user_store.record_exchange(profile, q, answer)
-            with lock:
-                state["chat_history"] = updated + [{"role": "assistant", "content": answer}]
+            with shared["lock"]:
+                history = list(shared["chat_history"])
+                cur     = shared["last_result"]
 
-        with lock:
-            last = state["last_result"]
-        display = pipe._annotate_frame(frame, last) if last else frame
-        cv2.imshow("Live — VisualRAG", display)
+            if cur is None:
+                answer_queue.put("Still initializing — no scene analyzed yet.")
+                continue
 
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            with lock:
-                state["running"] = False
-            break
+            factual = _try_answer_factually(q, cur.detections)
+            if factual:
+                answer = factual
+            else:
+                updated = build_followup_prompt(history, q)
+                answer  = pipe.llm.chat(updated)
+                with shared["lock"]:
+                    shared["chat_history"] = updated + [
+                        {"role": "assistant", "content": answer}
+                    ]
 
+            profile_ref = user_store.record_exchange(profile, q, answer)
+            answer_queue.put(answer)
+
+    # start all threads
+    t_display  = threading.Thread(target=display_worker,  daemon=True)
+    t_analysis = threading.Thread(target=analysis_worker, daemon=True)
+    t_answer   = threading.Thread(target=answer_worker,   daemon=True)
+    t_input    = threading.Thread(target=input_worker,    daemon=True)
+
+    t_display.start()
+    t_analysis.start()
+    t_answer.start()
+    t_input.start()
+
+    # main thread just waits for stop
+    try:
+        while not stop_event.is_set():
+            time.sleep(0.2)
+    except KeyboardInterrupt:
+        stop_event.set()
+
+    # cleanup
+    t_display.join(timeout=2)
     cap.release()
-    cv2.destroyAllWindows()
 
-    user_store.update_scene_summary(profile, state["last_result"].llm_response if state["last_result"] else "")
+    with shared["lock"]:
+        last = shared["last_result"]
+    if last:
+        user_store.update_scene_summary(profile, last.llm_response)
     user_store.save(profile)
-    print(f"\n[Live] Session ended. Profile saved for '{profile.user_id}'.")
-    print(f"[Live] Total episodes recorded: {pipe.episode_store.stats()['total_episodes']}")
+    print(f"\n[Live] Ended. Episodes: {pipe.episode_store.stats()['total_episodes']}")
+    print(f"[Profile] Saved for '{profile.user_id}'.")
 
+# ── entry point ───────────────────────────────────────────────────────────────
 
 def main():
     print("╔══════════════════════════════════════╗")
@@ -307,20 +380,19 @@ def main():
     print("╚══════════════════════════════════════╝\n")
 
     user_store = UserStore()
-    user_id = input("Username (or Enter for 'guest'): ").strip() or "guest"
-    profile = user_store.load(user_id)
-    profile = user_store.record_session_start(profile)
+    user_id    = input("Username (or Enter for 'guest'): ").strip() or "guest"
+    profile    = user_store.load(user_id)
+    profile    = user_store.record_session_start(profile)
 
     if profile.session_count > 1:
         print(f"Welcome back, {user_id}! Session #{profile.session_count}.")
         if profile.frequent_labels:
             top = sorted(profile.frequent_labels.items(), key=lambda x: -x[1])[:3]
-            print(f"Your common objects: {', '.join(l for l, _ in top)}")
+            print(f"Common objects: {', '.join(l for l, _ in top)}")
     else:
-        print(f"Welcome, {user_id}! First session.")
+        print(f"Welcome, {user_id}!")
 
-    print("\nInput mode:")
-    print("  L — live camera (real-time analysis + chat)")
+    print("\n  L — live camera")
     print("  V — video file")
     print("  I — image file")
     mode = input("\nChoice: ").strip().upper()
@@ -339,13 +411,12 @@ def main():
         _chat_loop(pipe, result, user_store, profile)
 
     elif mode == "V":
-        path = input("Video path: ").strip()
+        path    = input("Video path: ").strip()
         results = pipe.run_video(path)
         _video_summary(results)
         if results:
-            print("\nYou can now chat about the video.")
-            session_result = _build_video_session_result(results)
-            _chat_loop(pipe, session_result, user_store, profile, is_video_session=True)
+            print("\nChat about the video below.")
+            _chat_loop(pipe, _build_video_session_result(results), user_store, profile, is_video_session=True)
 
     elif mode == "L":
         cams = _list_cameras()
@@ -356,11 +427,10 @@ def main():
         for cam in cams:
             print(f"  {cam['index']} — {cam['name']}")
         cam_idx = int(input("Camera index: ").strip())
-        _run_live_interactive(pipe, cam_idx, user_store, profile)
+        _run_live(pipe, cam_idx, user_store, profile)
 
     else:
         print("Invalid choice.")
         sys.exit(1)
-
 
 main()

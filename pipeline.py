@@ -349,6 +349,23 @@ class Pipeline:
 
         return annotated
 
+
+    def _annotate_frame_minimal(self, frame, result):
+        # boxes and labels only — no LLM text bar at the bottom
+        annotated = frame.copy()
+        if result is None:
+            return annotated
+        h, w = annotated.shape[:2]
+        for d in result.detections:
+            x1 = int(d["bbox"][0] * w)
+            y1 = int(d["bbox"][1] * h)
+            x2 = int(d["bbox"][2] * w)
+            y2 = int(d["bbox"][3] * h)
+            cv2.rectangle(annotated, (x1, y1), (x2, y2), (0, 200, 100), 2)
+            cv2.putText(annotated, f"{d['label']} {d['score']:.0%}",
+                        (x1, max(y1 - 6, 12)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 200, 100), 2)
+        return annotated
     def _check_ready(self):
         if not self._ready:
             raise RuntimeError("Call pipeline.setup() before running.")

@@ -31,7 +31,52 @@ Please refer to Dataset/README.md for more info.
 
 ### Script Installation 
 
-(will be added soon)
+- **Windows** 
+
+Download the zip from browser or run the following command on terminal
+```cmd
+git clone https://github.com/<username>/VisualRAG.git
+cd VisualRAG
+```
+
+```
+setup.bat
+run.bat
+```
+
+- **Linux** 
+
+Run the following command on your console
+```bash
+git clone https://github.com/<username>/VisualRAG.git
+cd VisualRAG
+
+chmod +x setup.sh run.sh
+
+./setup.sh
+./run.sh
+```
 
 ---
 ## Script Information [?]
+
+*This will be updated soon*
+
+---
+## Development
+
+Frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+Tauri:
+
+```bash
+cd frontend
+npm run tauri dev
+```
+
+---

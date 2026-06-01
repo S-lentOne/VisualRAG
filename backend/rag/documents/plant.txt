@@ -1,0 +1,29 @@
+class: plant
+aliases: potted plant, houseplant, desk plant, succulent, cactus, indoor plant, planter
+category: decor
+
+description:
+A plant in a personal or workspace environment refers to a potted houseplant or small decorative plant kept indoors for aesthetic, psychological, and air-quality benefits. Common desk and shelf plants include succulents, cacti, pothos, snake plants, and small tropical plants.
+
+physical appearance:
+Potted plants vary widely in form. Small desk succulents and cacti are compact — 5–15 cm tall — in small terracotta, ceramic, or plastic pots. Medium houseplants (pothos, snake plant, peace lily) grow 20–50 cm tall in pots 10–20 cm in diameter. Plants have green foliage in various shapes — broad rounded leaves, narrow spiky leaves, trailing vines, or spiny cactus pads. Pots come in terracotta (orange-brown clay), white or gray ceramic, or plastic in various colors. A saucer sits under the pot to catch water drainage.
+
+common use contexts:
+- Decorating a desk, shelf, or windowsill in a home office or study space
+- Bringing natural elements into an otherwise digital, screen-heavy workspace
+- Low-maintenance companions in environments where the owner is frequently present
+- Improving mood and perceived air quality in indoor environments
+- Part of a deliberate aesthetic in a carefully arranged desk setup
+- Gifted as a welcoming or congratulatory item for a new workspace
+
+scene inference:
+A plant on or near a desk is a strong indicator of a personalized, comfortable, and well-established workspace. It suggests the owner cares about their environment and has invested effort in making the space pleasant. Succulents and cacti on a desk are extremely common among students and young professionals — they require minimal care and add visual interest. A thriving, well-kept plant suggests an attentive occupant. A wilting or dry plant may suggest a neglected or infrequently used space. Multiple plants on shelves or windowsills indicate an intentional, aesthetic-driven workspace arrangement.
+
+associated objects:
+laptop, notebook, cup, bottle, desk lamp, books
+
+typical locations:
+corner of a desk, windowsill, shelf above a desk, beside a monitor
+
+functional notes:
+Plants are strong personalization indicators. Unlike functional objects, a plant in a workspace is purely a choice — it signals that the person has invested in their environment beyond pure functionality. This is a reliable marker of a long-term, habitual workspace rather than a temporary or shared one. The size and type of plant (tiny succulent vs. large leafy plant) speaks to available desk space and the owner's plant care commitment.

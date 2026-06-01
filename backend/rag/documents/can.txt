@@ -1,0 +1,28 @@
+class: can
+aliases: soda can, energy drink can, beer can, aluminium can, beverage can, tin can
+category: food and drink
+
+description:
+A can is a cylindrical aluminium or steel container used to package carbonated beverages, energy drinks, beer, and other drinks for single-serve consumption. Cans are disposable, sealed containers that are opened by pulling a tab on the top.
+
+physical appearance:
+Standard beverage cans are 12 cm tall and 6.6 cm in diameter (standard 355 ml / 12 oz size). Taller slim cans (used for energy drinks like Red Bull) are 15 cm tall and 5.3 cm in diameter (250 ml). Cans are aluminium, printed with branding and graphics directly on the metal surface using vivid colors — red (Coca-Cola, Red Bull), blue (Pepsi, Monster Ultra), green (Sprite, Monster), and so on. The top of the can has a slightly recessed pull tab. An opened can has a bent-back tab visible. A crushed or empty can implies it has been fully consumed.
+
+common use contexts:
+- Casual drink during leisure, gaming, or relaxed work sessions
+- Energy drinks consumed during late-night study sessions for alertness
+- Beer or carbonated drinks during social or relaxed home environments
+- Quick hydration alternative during gaming or media consumption
+- Paired with snacks during a break or informal meal
+
+scene inference:
+A can on a desk or nearby is a strong leisure and informality indicator. An energy drink can (Red Bull, Monster, Bang) alongside a laptop or gaming setup strongly suggests a late-night work, study, or gaming session. Multiple empty cans imply an extended session with repeated consumption. A standard soda can suggests casual drinking during a relaxed activity. Beer cans or mixed drink cans indicate a social or off-duty environment. A can alongside a controller and monitor is a classic gaming session scene. Unlike a cup or water bottle, a can implies single-serve, often caffeinated or indulgent consumption rather than routine hydration.
+
+associated objects:
+controller, laptop, headphones, phone, snacks (implied), keyboard
+
+typical locations:
+desk surface, beside a monitor, on a coaster, on the floor beside a chair, on a coffee table
+
+functional notes:
+Energy drink cans are one of the most specific demographic and behavioral indicators in the class set. Their presence alongside study or gaming equipment suggests a late, intensive, possibly caffeine-dependent session. The brand visible on the can can further specify context — Red Bull is widespread among students; Monster is strongly associated with gaming culture. An empty can pushed to the side versus a full can just opened changes the phase of the session implied.

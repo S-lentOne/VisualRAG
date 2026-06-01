@@ -1,0 +1,29 @@
+class: laptop
+aliases: notebook computer, portable computer, MacBook, ThinkPad, laptop computer
+category: electronics
+
+description:
+A laptop is a portable personal computer with an integrated screen, keyboard, and battery, designed for mobile use. It combines all the components of a desktop computer into a compact, clamshell form factor.
+
+physical appearance:
+Laptops typically have a rectangular base (the keyboard unit) and a lid (the screen). They range from 11 to 17 inches diagonally, measured by screen size. Common colors are silver, gray, black, and white. When open, the screen is visible on top and the keyboard and trackpad are on the base. When closed, they resemble a flat rectangular slab 1 to 3 cm thick.
+
+common use contexts:
+- Work and office environments: document editing, emails, video calls, spreadsheets
+- Study and academic settings: note-taking, research, writing assignments
+- Creative work: photo editing, video production, music creation, graphic design
+- Programming and software development
+- Home entertainment: streaming video, browsing, casual gaming
+- Coffee shops, libraries, co-working spaces — portable productivity
+
+scene inference:
+A laptop in a scene strongly suggests a work, study, or creative session is underway. If paired with notebooks or pens, it likely indicates studying or note-taking alongside digital work. If paired with a mouse and monitor, it suggests a professional workstation setup. A laptop with a cup or bottle nearby suggests an extended work session. Multiple laptops in a scene may indicate a classroom, meeting, or collaborative environment.
+
+associated objects:
+mouse, monitor, keyboard (external), charger, USB cable, headphones, notebook, pen, backpack, cup, phone
+
+typical locations:
+desk, table, lap, bed, coffee shop counter, library table, office desk
+
+functional notes:
+Laptops are the central device in most modern work and study setups. Their presence anchors the activity of the scene. They can serve as the sole computing device or as part of a larger workstation when connected to external peripherals.

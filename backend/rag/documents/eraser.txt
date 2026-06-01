@@ -1,0 +1,28 @@
+class: eraser
+aliases: rubber eraser, pencil eraser, kneaded eraser, correction tool, rubber
+category: stationery
+
+description:
+An eraser is a stationery tool used to remove pencil marks, and in some cases pen marks, from paper. It is an essential companion to pencil-based writing and drawing, commonly found in student and artistic environments.
+
+physical appearance:
+Standard erasers are rectangular blocks, roughly 6 cm long, 2 cm wide, and 1.5 cm tall. They are typically pink, white, or beige. White polymer erasers are cleaner and more precise than traditional pink rubber erasers. Kneaded erasers (used by artists) are gray, putty-like, and can be molded into any shape. Pencil-top erasers are small pink cylinders affixed to the top of a pencil. Erasers show wear over time — they develop gray smudge marks and uneven edges from use.
+
+common use contexts:
+- Correcting pencil errors in notes, drawings, or written assignments
+- Erasing construction lines in sketches and technical drawings
+- Used in art for highlighting and blending in pencil drawings
+- Standard equipment in school pencil cases and desk supplies
+- Paired almost exclusively with pencils rather than pens
+
+scene inference:
+An eraser on a desk confirms pencil use is occurring or has recently occurred. Alongside a pencil, notebook, and ruler, it firmly establishes a structured academic study or technical drawing scene. Eraser shavings on a desk surface indicate active use. An eraser near a sketchbook and pencil set suggests artistic or design work. In a general study scene, the eraser is a minor but confirming detail that reinforces handwritten, pencil-based work.
+
+associated objects:
+pencil, pen, notebook, ruler, paper, calculator, backpack
+
+typical locations:
+desk surface, inside a pencil case, beside a notebook, on top of paper
+
+functional notes:
+The eraser is a minor scene element on its own but is highly confirmatory when paired with pencils and paper. Its condition (new and rectangular vs. worn and rounded) can suggest frequency of use. Eraser shavings on the desk surface are a reliable sign of active pencil work in progress.

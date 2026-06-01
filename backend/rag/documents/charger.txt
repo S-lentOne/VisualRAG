@@ -1,0 +1,28 @@
+class: charger
+aliases: phone charger, laptop charger, power adapter, USB charger, charging brick, power brick, wall adapter
+category: electronics
+
+description:
+A charger is a power supply device that replenishes the battery of an electronic device. Chargers come in many forms: wall adapters (plug into a wall outlet), charging pads (wireless), and multi-port USB hubs. They deliver regulated electrical power to devices via cables or inductive charging.
+
+physical appearance:
+Wall adapters (the most common type) are compact, cube-shaped or rectangular plastic blocks, typically 5–8 cm in their largest dimension. They are white, black, or gray. A plug protrudes from one side to connect to the wall, and a USB or proprietary port is on another side. Laptop chargers are larger bricks (10–15 cm) with a detachable cable. The cable itself is 1–2 m long, ending in USB-C, Lightning, or Micro-USB. Wireless chargers are flat circular or rectangular pads.
+
+common use contexts:
+- Keeping smartphones, tablets, and laptops powered throughout the day
+- On desks as part of a permanent charging station for multiple devices
+- On nightstands for overnight charging
+- In travel bags for on-the-go power
+- Multi-port chargers serving several devices simultaneously at a shared workstation
+
+scene inference:
+A charger on a desk indicates a device is being charged or the user habitually keeps it there. A charger connected to a phone or laptop confirms active charging. Multiple chargers or a multi-port hub suggest a power-user with several devices. A charger cable draped across a desk without a connected device suggests a recently unplugged device or a cable left out habitually. Chargers near workstations indicate extended sessions where battery management is part of the workflow.
+
+associated objects:
+phone, laptop, earbuds, USB cable, power strip
+
+typical locations:
+desk surface, wall outlet area, nightstand, inside a bag
+
+functional notes:
+The presence of a charger is a subtle but reliable indicator of device-heavy activity. In a study or work context, it confirms the user is planning an extended session. A wireless charging pad on a desk is a premium accessory that suggests a tech-forward, organized user.

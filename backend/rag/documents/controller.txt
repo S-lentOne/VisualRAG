@@ -1,0 +1,28 @@
+class: controller
+aliases: game controller, gamepad, joystick, PS5 controller, Xbox controller, Nintendo controller
+category: electronics
+
+description:
+A game controller is an input device designed for interacting with video games. It translates physical inputs — button presses, thumbstick movements, trigger pulls — into in-game actions. Controllers are used with gaming consoles and increasingly with PC gaming.
+
+physical appearance:
+Modern controllers (PlayStation, Xbox) are ergonomic, symmetrical devices roughly 15 cm wide and 10 cm tall, designed to be held with both hands. They feature two analog thumbsticks, a directional pad (D-pad), four face buttons (typically labeled with symbols or letters), two shoulder buttons per side, and two analog triggers. They are wireless (Bluetooth) with a USB charging port. Colors vary: black, white, and console-specific color variants. Nintendo Switch Joy-Cons are smaller, modular controllers that can be attached to the Switch console or used independently.
+
+common use contexts:
+- Console gaming (PlayStation, Xbox, Nintendo Switch)
+- PC gaming as an alternative to keyboard and mouse, especially for action and sports games
+- Retro gaming with emulators on a computer
+- Casual couch gaming in a living room setup
+- Competitive gaming and esports training
+
+scene inference:
+A controller on a desk alongside a monitor, keyboard, and mouse suggests PC gaming alongside traditional computing use — a hybrid setup common among gamers who also work or study. A controller alone on a couch or living room setting suggests console gaming in a dedicated leisure context. Multiple controllers indicate multiplayer gaming. A controller near a laptop suggests casual gaming during breaks or off-work hours. A controller sitting prominently on a desk alongside study materials is a common student desk scene.
+
+associated objects:
+monitor, keyboard, mouse, headphones, laptop, USB cable, phone
+
+typical locations:
+desk surface, couch, coffee table, beside a TV, inside a bag
+
+functional notes:
+The controller is a strong leisure and gaming indicator. Its presence alongside productivity items (laptop, notebook, pen) creates an interesting dual-use scene typical of a student or young professional environment — someone who works and games in the same space.

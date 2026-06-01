@@ -1,0 +1,28 @@
+class: chair
+aliases: office chair, desk chair, ergonomic chair, gaming chair, dining chair, stool, seat
+category: furniture
+
+description:
+A chair is a piece of furniture designed for a single person to sit on, consisting of a seat, backrest, and legs or a wheeled base. In the context of personal workspaces, chairs are most commonly office chairs (wheeled, adjustable) or gaming chairs (high-back, often with armrests and head cushion). The chair anchors the physical perspective of whoever occupies the desk or workspace.
+
+physical appearance:
+Office chairs have a padded seat and backrest on a five-point wheeled base with a central pneumatic lift column for height adjustment. They are typically 60–70 cm wide, 55–60 cm deep, and 80–120 cm tall (including back). Common colors are black, gray, and white. Mesh-back office chairs have a breathable lattice backrest. Gaming chairs resemble racing car seats — high-backed with bolstered sides, often in bold color combinations (black and red, white and blue) and with a visible neck pillow and lumbar cushion. Wooden or metal dining chairs are simpler, non-adjustable.
+
+common use contexts:
+- Sitting at a desk for work, study, programming, writing, or gaming
+- Long-duration seated work demanding ergonomic support
+- Gaming sessions requiring posture support during extended play
+- Office environments as standard workstation seating
+- Casual seating at a dining or meeting table
+
+scene inference:
+A chair visible in a scene, especially pulled up to a desk, confirms the human occupant's position and perspective. An empty office chair at a desk suggests the person has briefly stepped away but the workspace is active. A gaming chair alongside a monitor, keyboard, and mouse confirms a gaming or streaming setup. An ergonomic office chair (mesh back, adjustable arms) signals a professional or long-duration work environment. A simple chair pulled up to a study desk reinforces a student or home-office scene. A chair pushed away from a desk signals the session may be ending or paused.
+
+associated objects:
+desk, laptop, monitor, keyboard, mouse, backpack (nearby)
+
+typical locations:
+pulled up to a desk, in front of a workstation, in a living room, at a dining table
+
+functional notes:
+The chair anchors the human element of the scene. Its type communicates the nature and duration of the activity — an ergonomic chair implies hours of seated work, a gaming chair implies gaming or content creation, a basic chair implies casual or short-duration use. The chair's position relative to the desk (pulled in vs. pushed out) suggests whether a session is active or concluded.

@@ -1,0 +1,28 @@
+class: chopsticks
+aliases: chopstick, cooking chopsticks, wooden chopsticks, reusable chopsticks, eating sticks
+category: food and drink
+
+description:
+Chopsticks are a pair of tapered sticks used as the primary eating utensils in East Asian cuisines — including Chinese, Japanese, Korean, Vietnamese, and Taiwanese food cultures. They are used to pick up, move, and consume pieces of food by pinching them between the two sticks held in one hand.
+
+physical appearance:
+Chopsticks are long, slender sticks approximately 23–26 cm for standard eating chopsticks (longer for cooking). They are cylindrical or slightly tapered from a thicker grip end to a narrower tip. Materials include bamboo and wood (light tan to medium brown, often with a grainy texture), plastic (smooth, various colors), lacquered wood (often dark with decorative patterns), and stainless steel (sleek, silver). Disposable chopsticks are unfinished pale wood, often still joined at one end and split apart before use. Reusable chopsticks may be decorated with painted or inlaid designs.
+
+common use contexts:
+- Eating East Asian meals: rice, noodles, sushi, dumplings, stir-fry, and similar dishes
+- Used at a desk or table during a meal break within a work or study session
+- Part of a meal ordered in or cooked at home, consumed alongside work
+- Placed beside a takeout container, bowl, or plate during eating
+- Cooking and food preparation using long cooking chopsticks
+
+scene inference:
+Chopsticks in a scene strongly indicate an East Asian meal is being or has just been consumed. This is a reliable cultural and dietary context indicator. Chopsticks alongside a takeout container or bowl at a desk suggest a meal break during a work or study session — extremely common in university and office environments across Asia and increasingly elsewhere. Disposable chopsticks still in their paper sleeve indicate the meal is about to begin. Used chopsticks resting on a bowl or dish indicate the meal is in progress or recently finished. Chopsticks alongside a laptop, notebook, and can or cup create a vivid picture of a working-while-eating desk scene.
+
+associated objects:
+cup, bottle, can, bowl (implied), laptop, notebook, takeout container (implied)
+
+typical locations:
+on a plate or bowl rim, on a chopstick rest, beside a takeout container, on the desk surface, inside a bag
+
+functional notes:
+Chopsticks carry strong cultural specificity compared to most other food utensils. Their presence alongside other personal items (phone, laptop) and meal indicators (bowl, can, cup) creates one of the richest scene narratives available from a small set of objects. The type of chopsticks (disposable vs. reusable lacquered vs. steel) adds further detail about the meal source (takeout vs. home-cooked vs. restaurant).

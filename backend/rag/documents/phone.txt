@@ -1,0 +1,30 @@
+class: phone
+aliases: smartphone, mobile phone, cell phone, iPhone, Android phone, mobile device
+category: electronics
+
+description:
+A smartphone is a handheld computing device that combines mobile communication (calls, SMS) with internet access, apps, a camera, and a broad range of computing capabilities. It is the most universally carried personal device.
+
+physical appearance:
+Smartphones are thin, rectangular slabs with a large touchscreen on the front face. Modern phones range from 14 to 17 cm tall and 7 to 8 cm wide, with screens from 6 to 6.9 inches. They are 7–9 mm thin. The back may be glass, metal, or plastic. A prominent camera module (one to four lenses) protrudes slightly from the back. Home button is absent on most modern phones — navigation is gesture-based. Colors range widely: black, white, silver, gold, blue, purple, and more.
+
+common use contexts:
+- Communication: calls, messages, email
+- Social media browsing and content consumption
+- Navigation and maps
+- Photography and video capture
+- Mobile banking, payments, and productivity
+- As a secondary screen alongside a laptop or desktop
+- Casual gaming and entertainment
+
+scene inference:
+A phone face-down on a desk suggests the user is focused on another task (laptop, studying) and has set their phone aside. A phone face-up may indicate multitasking or expectation of a notification. A phone propped up suggests it is being used for reference or as a secondary display. A phone next to a charger suggests charging behavior. In a workspace scene, a phone alongside a laptop is extremely common and indicates the user maintains both digital environments simultaneously.
+
+associated objects:
+charger, earbuds, headphones, laptop, USB cable, wallet, keys
+
+typical locations:
+desk, table, hand, pocket, beside a laptop, on a charger
+
+functional notes:
+The phone is the most context-neutral object — it appears in virtually every scene. Its orientation and proximity to other objects provide the most scene inference value. A phone paired with study materials suggests distraction management or reference use. A phone with earbuds nearby suggests the user listens to audio while working.

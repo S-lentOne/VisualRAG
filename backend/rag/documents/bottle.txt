@@ -1,0 +1,28 @@
+class: bottle
+aliases: water bottle, reusable bottle, plastic bottle, sports bottle, flask, thermos, hydration bottle
+category: food and drink
+
+description:
+A bottle is a narrow-necked container used for storing and drinking liquids. In personal workspace, study, and active environments, bottles most commonly refer to reusable water bottles carried for hydration throughout the day. They may also be sports bottles, insulated flasks, or single-use plastic water bottles.
+
+physical appearance:
+Reusable water bottles are tall, cylindrical containers 20–30 cm tall and 7–8 cm in diameter, typically made from stainless steel or BPA-free plastic. They come in a wide range of colors and often feature a screw-top lid, flip-top lid, or straw lid. Many have a carry loop or handle. Insulated stainless steel bottles (Hydro Flask, Stanley, Nalgene) are the most common type seen on desks. Single-use plastic bottles are thinner-walled, transparent or semi-transparent, with a simple screw cap. Sports bottles have a squeeze body and pop-up nozzle.
+
+common use contexts:
+- Staying hydrated during work, study, gym, or outdoor activities
+- Keeping water accessible on a desk throughout the day
+- Replacing single-use plastic bottles with a reusable alternative
+- Carried in a backpack side pocket for on-the-go hydration
+- Used during sports, exercise, and outdoor activities
+
+scene inference:
+A water bottle on a desk is an indicator of health-conscious, sustained work or study behavior. It suggests the person is settled in for an extended session and is managing their hydration. A sticker-covered bottle is common among students and young professionals, adding personalisation detail to the workspace. A sports bottle near a gym bag or on the floor suggests pre- or post-workout behavior. A bottle alongside a laptop and notebook forms a classic student desk setup. A large 1-liter bottle on a desk signals deliberate daily hydration tracking behavior.
+
+associated objects:
+backpack, laptop, notebook, cup, chair, gym bag (implied)
+
+typical locations:
+desk surface, beside a laptop, on the floor beside a chair, in a backpack side pocket
+
+functional notes:
+The water bottle has become a ubiquitous desk item, particularly among students and young professionals. Stickers on a bottle are a reliable demographic indicator — this is extremely common among university students. The bottle's size (small 500 ml vs. large 1 L Nalgene) gives soft clues about the user's hydration habits. An insulated bottle suggests the user values keeping their water cold across long sessions.

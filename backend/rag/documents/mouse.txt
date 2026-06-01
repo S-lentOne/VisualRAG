@@ -1,0 +1,28 @@
+class: mouse
+aliases: computer mouse, wireless mouse, optical mouse, trackball, gaming mouse
+category: electronics
+
+description:
+A computer mouse is a handheld pointing device that detects two-dimensional motion relative to a surface and translates it into cursor movement on screen. It typically has two clickable buttons and a scroll wheel.
+
+physical appearance:
+Mice are small, ergonomic devices designed to fit in the palm of a hand. They are roughly 10–13 cm long, 5–7 cm wide, and 3–4 cm tall. Common shapes include symmetrical (ambidextrous) and right-handed ergonomic designs. Colors are typically black, white, or gray, though gaming mice often feature RGB lighting. Wired mice have a cable extending from the front; wireless mice do not.
+
+common use contexts:
+- Desktop and laptop workstations for navigation and precise cursor control
+- Office environments for general productivity work
+- Gaming setups where precision and speed are critical
+- Creative work such as photo editing and digital illustration
+- Any context where a trackpad is insufficient for precision tasks
+
+scene inference:
+A mouse strongly suggests a computing environment. Paired with a keyboard and monitor, it confirms a desktop workstation. A mouse alongside a laptop indicates the user prefers external input over the trackpad, often for productivity or creative work. A gaming mouse (larger, with extra buttons and RGB lighting) alongside a keyboard suggests a gaming setup. A mouse without a visible computer still implies one is just off-frame.
+
+associated objects:
+keyboard, monitor, laptop, desk mat, USB cable, computer
+
+typical locations:
+desk, table, workstation, beside a laptop
+
+functional notes:
+The mouse is a strong indicator of active computer use. Its orientation on a surface (to the right or left of a keyboard) can suggest handedness of the user. A wireless mouse implies a cleaner, more deliberate desk setup.

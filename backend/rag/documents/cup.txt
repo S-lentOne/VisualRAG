@@ -1,0 +1,28 @@
+class: cup
+aliases: mug, coffee cup, tea cup, drinking cup, ceramic mug, travel mug, glass
+category: food and drink
+
+description:
+A cup is a small, open-topped container used for drinking hot or cold beverages. In workspace and study environments, cups most commonly contain coffee, tea, or water. The cup is one of the most universally present objects on desks and tables worldwide.
+
+physical appearance:
+Ceramic mugs are the most common desk cup — cylindrical or slightly tapered, 8–10 cm tall, 8–9 cm in diameter, with a single handle. They hold 200–400 ml. Colors are highly varied — solid colors, printed patterns, logos, and custom designs. Coffee cups at cafés are smaller (espresso: 60–90 ml; cappuccino: 150–180 ml) and often have a saucer. Travel mugs are taller, insulated stainless-steel or plastic cylinders 18–22 cm tall with a sealed lid. Glass cups are transparent. Tea cups are shallower and more delicate than coffee mugs.
+
+common use contexts:
+- Drinking coffee or tea during work or study sessions for alertness and comfort
+- Keeping a beverage warm while working at a desk for extended periods
+- Tea during a relaxed reading or writing session
+- Hot drinks during collaborative meetings at a table
+- Reusable travel mugs for beverages brought from home to work or study
+
+scene inference:
+A cup on a desk is extremely common and suggests an extended or comfortable work or study session. Coffee specifically is strongly associated with morning work routines, productivity-focused sessions, and late-night study. Tea is associated with relaxed, slower-paced reading, writing, or reflective work. A half-full or steam-implying cup indicates an ongoing session. An empty mug beside a laptop may suggest the person has been working for a while. A branded mug (university logo, company logo) personalizes the workspace. A travel mug suggests the person brought their drink from home, indicating a commuter or student at a shared workspace.
+
+associated objects:
+laptop, notebook, phone, coaster, water bottle, plant
+
+typical locations:
+desk surface (beside a laptop or notebook), table, coaster, kitchen counter
+
+functional notes:
+The cup is a warm, humanizing detail in any scene. It reinforces the idea of a sustained, comfortable session. The type of cup can indicate the setting — a ceramic mug suggests a home or office desk; a paper café cup suggests a coffee shop; a travel mug suggests a commuter environment. Cups with visible contents (dark coffee, light tea, transparent water) add further color to the scene narrative.

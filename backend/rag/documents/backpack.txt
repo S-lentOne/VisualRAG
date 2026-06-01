@@ -1,0 +1,28 @@
+class: backpack
+aliases: bag, rucksack, school bag, laptop bag, daypack, satchel
+category: personal item
+
+description:
+A backpack is a bag carried on the back using two shoulder straps, used to transport personal belongings, books, electronics, and daily essentials. It is the primary carrying accessory for students, commuters, and travelers.
+
+physical appearance:
+Backpacks are rectangular or contoured bags ranging from 20 to 50 liters in volume. They stand 40–55 cm tall and 25–35 cm wide when full. Most have a main compartment, a front zip pocket, and side mesh pockets for bottles. Straps are padded for comfort. Common materials include nylon, polyester, and canvas. Colors vary widely — black, gray, navy, and olive are common for everyday use; bright colors for children. Laptop backpacks have a dedicated padded sleeve for a laptop. Some backpacks have external USB charging ports connected to an internal power bank pocket.
+
+common use contexts:
+- Daily carry for students: transporting books, notebooks, a laptop, and personal items to class
+- Commuter bag: carrying work essentials and a laptop to and from an office or co-working space
+- Travel daypack: carrying essentials during city trips or outdoor activities
+- Gym bag: carrying workout clothes and gear
+- Storing equipment: cameras, electronics, and accessories for field work
+
+scene inference:
+A backpack on or near a desk strongly suggests the scene is at a study or work location outside the home — a library, university, coffee shop, or office. A backpack placed on the floor beside a chair confirms someone is settled in for an extended session. An open backpack with contents spilling out (notebooks, chargers, bottles) gives rich context about the type of user and session. A packed backpack near a door suggests the person is preparing to leave. At home, a dropped backpack in a workspace suggests the person just arrived from school or work.
+
+associated objects:
+laptop, notebook, pen, phone, earbuds, water bottle, keys, wallet, charger
+
+typical locations:
+on a chair, on the floor beside a desk, hung on the back of a chair, on a table surface (if small)
+
+functional notes:
+The backpack is one of the strongest indicators of a student or commuter scene. Its contents (when partially visible or implied by context) narrate the nature of the session. A well-organized backpack with compartments visible suggests a methodical, prepared user. A bulging, disorganized one suggests a busier, more chaotic lifestyle or session.

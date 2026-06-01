@@ -1,27 +1,27 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
-
-# virtual environment
+.vscode/
+__pycache__
 bin/
-include/
+data/
+images/
 lib/
 lib64/
-pyvenv.cfg
-venv/
-
-# dataset images
-dataset/images/
-
-# python cache
-__pycache__/
+include/
+share/
 *.pyc
+*.pyo
+*.pyd
+pyvenv.cfg
 
-# training outputs
-runs/
-*.pt
-*.onnx
-*.tflite
-*.task
+# Tauri / svelte
 
-# OS clutter
 .DS_Store
-Thumbs.db
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

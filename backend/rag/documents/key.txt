@@ -1,0 +1,27 @@
+class: key
+aliases: house key, car key, keys, keychain, key fob
+category: personal item
+
+description:
+Keys are small, metal or electronic devices used to mechanically or electronically lock and unlock doors, vehicles, padlocks, and other secured mechanisms. House keys, car keys, padlock keys, and electronic key fobs are the most common types encountered in everyday personal spaces.
+
+physical appearance:
+Traditional keys are metal, 5–8 cm long, with a distinctive cut pattern along one edge and a rounded head at the top. Key heads often have a rubber or plastic cap for grip and identification by color. Car key fobs are larger — 7–10 cm — and include buttons for remote locking and unlocking. Keys are almost always found in clusters on a keyring or keychain that may have additional items (loyalty cards, bottle openers, small flashlights, decorative charms). Common colors are silver, gold/brass, and copper.
+
+common use contexts:
+- Carried daily alongside wallet and phone as an essential personal item
+- Placed on a hook near the door or dumped on a desk or table upon arrival home
+- Used to access a home, office, car, or locker
+- Left visible on a desk, counter, or table when the owner is in the space
+
+scene inference:
+Keys on a desk or table, especially alongside a wallet and phone, form the quintessential pocket dump of someone who has just arrived and settled into the space. Keys near a bag suggest the person is preparing to leave. Keys alone on a surface (without other personal items) may indicate a dedicated key hook or drop zone. A car key fob in a workspace suggests the person drove to the location. Keys in a scene help confirm the presence and ownership of the space by a specific individual.
+
+associated objects:
+wallet, phone, backpack, watch
+
+typical locations:
+desk surface, table, hook near a door, inside a bag or backpack, beside a phone
+
+functional notes:
+Keys are small and can be easy to miss in a frame, but their presence alongside a wallet and phone forms one of the most reliable "person is present and settled" clusters in a scene. The type of key (house vs. car vs. padlock) can give further context about the environment.

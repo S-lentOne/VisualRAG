@@ -1,0 +1,29 @@
+class: earbuds
+aliases: wireless earbuds, TWS earbuds, AirPods, in-ear headphones, earphones, true wireless earbuds
+category: electronics
+
+description:
+Earbuds are small, in-ear audio devices used for personal listening. Modern true wireless earbuds (TWS) connect to devices via Bluetooth without any cable. They often feature active noise cancellation (ANC), touch controls, and a companion charging case.
+
+physical appearance:
+Individual earbuds are small — roughly 2–3 cm in each dimension — designed to sit in or just outside the ear canal. They are teardrop or bean-shaped, often with a short stem (as in AirPods) or a compact rounded design. Colors are typically white, black, or gray. The charging case is a small rectangular or oval box, roughly 6–7 cm long and 4–5 cm wide, that the earbuds magnetically snap into. The case has a lid that flips open.
+
+common use contexts:
+- Listening to music or podcasts during work, study, or commute
+- Taking calls without holding the phone
+- Noise cancellation in open or noisy environments
+- Exercise and physical activity (often with ear hooks)
+- Focus and concentration during deep work sessions
+- Video calls and online meetings as a microphone and audio device
+
+scene inference:
+Earbuds on a desk (especially out of their case) suggest the user was recently using them or plans to. Earbuds alongside study materials indicate the user listens to music or ambient sound while studying. A charging case on the desk signals the earbuds are either inside charging or have just been removed for use. Earbuds near a phone or laptop indicate active audio consumption alongside device use. Their presence in a workspace hints at a preference for focused, immersive work with audio accompaniment.
+
+associated objects:
+phone, laptop, charger, USB cable, backpack
+
+typical locations:
+desk surface, beside a phone, inside a bag, on a charger, beside a laptop
+
+functional notes:
+Earbuds are small and can be easy to miss in a frame. Their presence is a strong indicator that audio is important to the user's workflow or environment. The charging case nearby suggests an organized user who keeps their gear docked when not in use.

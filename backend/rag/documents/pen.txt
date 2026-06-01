@@ -1,0 +1,29 @@
+class: pen
+aliases: ballpoint pen, fountain pen, rollerball pen, felt-tip pen, marker, writing pen
+category: stationery
+
+description:
+A pen is a handheld writing instrument that deposits ink onto a surface. Ballpoint pens use a tiny rotating ball to distribute thick oil-based ink. Rollerball and gel pens use water-based or gel ink for smoother writing. Fountain pens use a nib and liquid ink reservoir. Pens are among the most universally owned and used tools in any study or work environment.
+
+physical appearance:
+Most pens are cylindrical, roughly 14–15 cm long and 8–12 mm in diameter. Ballpoint pens are slim, often with a retractable tip or cap. Gel pens may have a rubberized grip section. Fountain pens are heavier, with a metal nib at the tip and often a more premium look. Colors are typically black, blue, white, or metallic, though novelty colors are common. Pens often have a clip for attaching to a pocket or notebook cover. Multiple pens may be collected in a pen cup or scattered across a desk.
+
+common use contexts:
+- Handwriting notes in a notebook during study or work
+- Signing documents
+- Annotating printed materials, books, or papers
+- Filling out forms
+- Quick jotting of reminders or ideas on sticky notes or loose paper
+- Carried in a bag, pocket, or left on a desk as a constant writing tool
+
+scene inference:
+A pen resting on or beside an open notebook confirms active or recent handwriting. A pen on a desk without a notebook may indicate a writing-ready workspace or a pen left habitually. Multiple pens in different colors suggest studying with color-coded annotation (common in students who highlight and categorize material). A fountain pen on a desk signals a deliberate, quality-focused writing preference. A pen alongside a calculator and ruler reinforces a STEM or technical study scene.
+
+associated objects:
+notebook, eraser, ruler, calculator, paper, laptop, backpack
+
+typical locations:
+on a notebook, in a pen holder, on a desk surface, in a bag, clipped to a pocket
+
+functional notes:
+A pen is rarely a scene-defining object on its own, but reinforces study and writing activity when paired with a notebook or paper. Multiple pens, especially in different colors, strongly reinforce an active study session. A pen's presence is a quiet but reliable indicator of a writing-focused task.

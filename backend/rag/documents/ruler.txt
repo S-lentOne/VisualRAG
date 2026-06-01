@@ -1,0 +1,29 @@
+class: ruler
+aliases: ruler, straightedge, measuring ruler, scale ruler, drafting ruler, set square
+category: stationery
+
+description:
+A ruler is a flat, rigid measuring and drawing tool marked with a scale in centimeters, inches, or both. It is used to measure lengths, draw straight lines, and as a general reference tool in study, technical drawing, and crafts.
+
+physical appearance:
+Standard rulers are flat, rectangular strips 30 cm (12 inches) long and 3–4 cm wide, made from plastic, wood, or metal. They are typically transparent or translucent plastic, yellow wood, or stainless steel. The surface bears printed measurement markings. Shorter 15 cm rulers fit in pencil cases. Set squares are right-triangle-shaped rulers at 45° or 30/60° angles, used in geometry and technical drawing. Longer drafting rulers may be 45–60 cm.
+
+common use contexts:
+- Drawing straight lines in notes, diagrams, charts, and technical drawings
+- Measuring lengths of objects or drawn elements in exercises
+- Geometry and mathematics for constructing shapes, angles, and figures
+- Technical drawing, architecture, and engineering work
+- Cutting guides in craft and art projects
+- Underlining text neatly in notes
+
+scene inference:
+A ruler on a desk is a moderate-strength indicator of academic or technical activity. Alongside a pen, pencil, and notebook, it confirms structured note-taking with an emphasis on neatness or technical precision. A ruler next to a calculator and geometry textbook confirms a mathematics or physics study session. In an art or design context, a ruler alongside pencils and a sketchbook suggests technical illustration or layout work. A ruler alone on a desk is an ambient stationery item that does not strongly define the scene on its own.
+
+associated objects:
+pen, pencil, eraser, calculator, notebook, compass, set square, paper
+
+typical locations:
+on a desk surface, inside a pencil case, on top of a notebook, alongside other stationery
+
+functional notes:
+The ruler reinforces precision and structure in the scene. Its presence alongside mathematical or scientific tools (calculator, compass) narrows the scene to STEM disciplines. A set square specifically implies geometry or technical drawing. Rulers are more commonly associated with student scenes than professional office environments.

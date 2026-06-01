@@ -35,7 +35,7 @@ Please refer to Dataset/README.md for more info.
 
 Download the zip from browser or run the following command on terminal
 ```cmd
-git clone https://github.com/<username>/VisualRAG.git
+git clone https://github.com/s-lentOne/VisualRAG.git
 cd VisualRAG
 ```
 
@@ -48,7 +48,7 @@ run.bat
 
 Run the following command on your console
 ```bash
-git clone https://github.com/<username>/VisualRAG.git
+git clone https://github.com/S-lentOne/VisualRAG.git
 cd VisualRAG
 
 chmod +x setup.sh run.sh
